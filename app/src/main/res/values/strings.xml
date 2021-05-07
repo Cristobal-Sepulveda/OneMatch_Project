@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="welcome_to_the_one_match_project">Welcome to One Match</string>
+    <string name="button_login">Login</string>
+    <string name="location_required_error">Location services must be enabled to use the app</string>
+    <string name="action_logout">Logout</string>
 </resources>
