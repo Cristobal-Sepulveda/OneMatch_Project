@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.OneMatchProject.NoActionBar">
+    <style name="Theme.OneMatchProject.NoActionBar" parent="Theme.OneMatchProject">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

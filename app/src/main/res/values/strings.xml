@@ -8,10 +8,14 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
+    <string name="menu_map">Map</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="welcome_to_the_one_match_project">Welcome to One Match</string>
     <string name="button_login">Login</string>
     <string name="location_required_error">Location services must be enabled to use the app</string>
     <string name="action_logout">Logout</string>
+    <string name="save">Save</string>
+    <string name="saveText">Ver cancha</string>
+    <string name="permission_denied_explanation">Grant location permission in order to load the map near your location.</string>
+    <string name="settings">Settings</string>
 </resources>
