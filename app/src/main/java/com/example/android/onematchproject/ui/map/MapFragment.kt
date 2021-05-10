@@ -16,7 +16,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
-import com.example.android.onematchproject.BaseFragment
+import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.databinding.FragmentMapBinding
 import com.google.android.gms.location.FusedLocationProviderClient
