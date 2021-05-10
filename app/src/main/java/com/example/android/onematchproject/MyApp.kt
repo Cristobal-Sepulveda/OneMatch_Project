@@ -1,3 +1,4 @@
+/*
 package com.example.android.onematchproject
 
 import android.app.Application
@@ -13,9 +14,11 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        /**
+        */
+/**
          * use Koin Library as a service locator
-         */
+         *//*
+
         val myModule = module {
             //Declare a ViewModel - be later inject into Fragment with dedicated injector using by viewModel()
             viewModel {
@@ -48,4 +51,4 @@ class MyApp : Application() {
 
 
     }
-}
+}*/

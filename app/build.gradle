@@ -2,12 +2,21 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "com.example.android.onematchproject"
@@ -15,7 +24,6 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,16 +33,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
 
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
+    }
+
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 }
 
@@ -80,20 +91,7 @@ dependencies {
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
     implementation "org.koin:koin-androidx-scope:$koinVersion"
-    // Koin for Kotlin Multiplatform
-    implementation "io.insert-koin:koin-core:$koinVersion"
-    // Koin Test for Kotlin Multiplatform
-    testImplementation "io.insert-koin:koin-test:$koinVersion"
-    // Koin Extended & experimental features (JVM)
-    implementation "io.insert-koin:koin-core-ext:$koinVersion"
-    // Koin main features for Android (Scope,ViewModel ...)
-    implementation "io.insert-koin:koin-android:$koinVersion"
-    // Koin Android - experimental builder extensions
-    implementation "io.insert-koin:koin-android-ext:$koinVersion"
-    // Koin for Jetpack WorkManager
-    implementation "io.insert-koin:koin-androidx-workmanager:$koinVersion"
-    // Koin for Jetpack Compose (unstable version)
-    implementation "io.insert-koin:koin-androidx-compose:$koinVersion"
+
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:$junitVersion"
@@ -140,5 +138,5 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.8.0')
     // Add the dependencies for the desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
-    implementation "com.firebaseui:firebase-ui-auth:$firebaseUiAuth"
+    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
 }

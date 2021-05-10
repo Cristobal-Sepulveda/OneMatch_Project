@@ -70,8 +70,8 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         fusedLocationProviderClient = LocationServices
             .getFusedLocationProviderClient(requireActivity())
 
-        binding.savePOILatLgnButton.setOnClickListener {
-            onLocationSelected()
+        binding.selectFieldButton.setOnClickListener {
+            /*onLocationSelected()*/
         }
 
         return binding.root
@@ -82,8 +82,27 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         getDeviceLocation()
         checkPermissionsAndGetDeviceLocation()
         setMapStyle(map)
-        setPOIOrAnyPlaceOnClick(map)
+        /*setPOIOrAnyPlaceOnClick(map)*/
 
+    }
+
+    private fun setMapStyle(map: GoogleMap) {
+        try {
+            // Customize the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            val success = map.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(
+                    context,
+                    R.raw.map_style
+                )
+            )
+
+            if (!success) {
+                Log.e("SelectLocationFragment", "Style parsing failed.")
+            }
+        } catch (e: Resources.NotFoundException) {
+            Log.e("SelectLocationFragment", "Can't find style. Error: ", e)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -106,8 +125,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>,
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
                                             grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (
@@ -241,7 +259,8 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         return foregroundLocationApproved && backgroundPermissionApproved
     }
 
-    private fun setPOIOrAnyPlaceOnClick(map: GoogleMap) {
+
+    /*private fun setPOIOrAnyPlaceOnClick(map: GoogleMap) {
         map.setOnPoiClickListener { poi ->
             val snippet = String.format(
                     Locale.getDefault(),
@@ -335,25 +354,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
                         )
             }
         }
-    }
-
-    private fun setMapStyle(map: GoogleMap) {
-        try {
-            // Customize the styling of the base map using a JSON object defined
-            // in a raw resource file.
-            val success = map.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            context,
-                            R.raw.map_style
-                    )
-            )
-
-            if (!success) {
-                Log.e("SelectLocationFragment", "Style parsing failed.")
-            }
-        } catch (e: Resources.NotFoundException) {
-            Log.e("SelectLocationFragment", "Can't find style. Error: ", e)
-        }
-    }
+    }*/
 }
 
