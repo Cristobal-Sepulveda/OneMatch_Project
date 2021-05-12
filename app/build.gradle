@@ -81,7 +81,6 @@ dependencies {
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
     kapt "androidx.room:room-compiler:$roomVersion"
 
     //Coroutines Dependencies
@@ -139,4 +138,5 @@ dependencies {
     // Add the dependencies for the desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
     implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
+    implementation 'com.google.firebase:firebase-firestore:22.1.2'
 }

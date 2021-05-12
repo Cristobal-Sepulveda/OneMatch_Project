@@ -8,6 +8,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.android.onematchproject.databinding.ActivityAuthenticationBinding
+import com.example.android.onematchproject.utils.CommonVariables.REQUEST_TURN_DEVICE_LOCATION_ON
+import com.example.android.onematchproject.utils.CommonVariables.SIGN_IN_RESULT_CODE
+import com.example.android.onematchproject.utils.CommonVariables.TAG
+import com.example.android.onematchproject.utils.CommonVariables.firebaseAuth
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.gms.common.api.ResolvableApiException
@@ -24,15 +28,9 @@ import com.google.firebase.auth.FirebaseAuth
 class AuthenticationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthenticationBinding
-    companion object {
-        const val TAG = "LoginFragment"
-        const val SIGN_IN_RESULT_CODE = 1001
-        const val REQUEST_TURN_DEVICE_LOCATION_ON = 29
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth.currentUser!= null){
             val intent = Intent(this, MainActivity::class.java)
             finish()
