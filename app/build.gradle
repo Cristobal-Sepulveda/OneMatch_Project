@@ -63,6 +63,9 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    //Circle Profile Picture View
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     // Architecture Components
 
     //Navigation dependencies

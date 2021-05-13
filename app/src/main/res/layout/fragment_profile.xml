@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.android.onematchproject.ui.home.HomeViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/teal_700"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_circleImageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/user_profile"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/white"
+                android:layout_marginTop="@dimen/space_big" />
+
+            <TextView
+                android:id="@+id/username_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_big"
+                android:text="Cristóbal Ignacio Sepúlveda Silva"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_big"
+                android:textColor="@color/white"
+                tools:text="Cristóbal Sepúlveda"/>
+
+            <TextView
+                android:id="@+id/user_location_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_small"
+                android:text="Maipú, Santiago de Chile"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_normal"
+                android:textColor="@color/black"
+                tools:text="Maipú, Santiago de Chile"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_big">
+
+                <Button
+                    android:id="@+id/mainPosition_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Posicion predilecta"
+                    android:textSize="@dimen/text_small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="@dimen/space_big"/>
+
+                <Button
+                    android:id="@+id/secondaryPosition_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Posicion alternativa"
+                    android:textSize="@dimen/text_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="@dimen/space_big"/>
+
+                <TextView
+                    android:id="@+id/mainPosition_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_small"
+                    android:gravity="center"
+                    android:text="Delantero"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/gamesNumber_textView"
+                    app:layout_constraintEnd_toStartOf="@id/secondaryPosition_textView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mainPosition_button" />
+
+                <TextView
+                    android:id="@+id/secondaryPosition_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_small"
+                    android:gravity="center"
+                    android:text="Defensa"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@id/mainPosition_textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/winNumber_textView"
+                    app:layout_constraintTop_toBottomOf="@id/secondaryPosition_button" />
+
+                <TextView
+                    android:id="@+id/gamesNumber_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/teal_200"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/space_small"
+                    android:padding="8dp"
+                    android:text="100"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_big"
+                    app:layout_constraintEnd_toStartOf="@id/winNumber_textView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mainPosition_textView" />
+
+                <TextView
+                    android:id="@+id/winNumber_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/space_small"
+                    android:background="@color/purple_700"
+                    android:padding="8dp"
+                    android:text="63"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_big"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/gamesNumber_textView"
+                    app:layout_constraintTop_toBottomOf="@id/secondaryPosition_textView" />
+
+                <TextView
+                    android:id="@+id/gamesText_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:background="@color/teal_200"
+                    android:text="Games"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_normal"
+                    app:layout_constraintEnd_toStartOf="@+id/winText_textView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gamesNumber_textView" />
+
+                <TextView
+                    android:id="@+id/winText_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/purple_700"
+                    android:text="Wins"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/gamesText_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/winNumber_textView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
