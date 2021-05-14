@@ -7,22 +7,15 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.android.onematchproject.ui.home.HomeViewModel"/>
+            type="com.example.android.onematchproject.ui.profile.ProfileViewModel"/>
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@color/teal_700"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@color/teal_700">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_circleImageView"
@@ -64,21 +57,23 @@
                     android:id="@+id/mainPosition_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Posicion predilecta"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/posicion_predilecta"
                     android:textSize="@dimen/text_small"
+                    app:layout_constraintEnd_toStartOf="@+id/secondaryPosition_button"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="@dimen/space_big"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/secondaryPosition_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
                     android:text="Posicion alternativa"
                     android:textSize="@dimen/text_small"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginEnd="@dimen/space_big"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/mainPosition_textView"
@@ -86,12 +81,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_small"
                     android:gravity="center"
-                    android:text="Delantero"
+                    android:text="@{viewModel.selectedMainPosition}"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toTopOf="@+id/gamesNumber_textView"
                     app:layout_constraintEnd_toStartOf="@id/secondaryPosition_textView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mainPosition_button" />
+                    app:layout_constraintTop_toBottomOf="@id/mainPosition_button"
+                    tools:text = "@string/option_delantero"/>
 
                 <TextView
                     android:id="@+id/secondaryPosition_textView"
@@ -99,12 +95,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_small"
                     android:gravity="center"
-                    android:text="Defensa"
+                    android:text="@{viewModel.selectedSecondaryPosition}"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toEndOf="@id/mainPosition_textView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/winNumber_textView"
-                    app:layout_constraintTop_toBottomOf="@id/secondaryPosition_button" />
+                    app:layout_constraintTop_toBottomOf="@id/secondaryPosition_button"
+                    tools:text = "@string/option_defensa"/>
 
                 <TextView
                     android:id="@+id/gamesNumber_textView"
@@ -165,6 +162,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/winNumber_textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

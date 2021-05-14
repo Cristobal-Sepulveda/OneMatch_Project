@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/option_delantero"
+        android:title="@string/option_delantero" />
+    <item android:id="@+id/option_mediocampista"
+        android:title="@string/option_mediocampista" />
+    <item android:id="@+id/option_defensa"
+        android:title="@string/option_defensa" />
+    <item android:id="@+id/option_arquero"
+        android:title="@string/option_arquero" />
+</menu>

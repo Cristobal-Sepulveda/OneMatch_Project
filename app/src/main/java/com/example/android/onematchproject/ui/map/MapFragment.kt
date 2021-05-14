@@ -12,13 +12,13 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
 import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.databinding.FragmentMapBinding
+import com.example.android.onematchproject.ui.profile.ProfileViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,13 +29,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
+import org.koin.android.ext.android.inject
 
 
+class MapFragment() : BaseFragment(), OnMapReadyCallback {
 
-class MapFragment : BaseFragment(), OnMapReadyCallback {
-
-    //Use Koin to get the view model of the SaveReminder
+    //Use Koin to get the view model of the ProfileViewModel
+    override val _viewModel: ProfileViewModel by inject()
 
     private lateinit var binding: FragmentMapBinding
     private val defaultLocation = LatLng(-33.8523341, 151.2106085)

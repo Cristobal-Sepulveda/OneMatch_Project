@@ -1,10 +1,10 @@
-package com.example.android.onematchproject.data
+package com.example.android.onematchproject.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.android.onematchproject.data.local.MatchDBO
+import com.example.android.onematchproject.data.dbo.MatchDBO
 
 /**
  * Data Access Object for the matches table.
@@ -23,7 +23,7 @@ interface MatchesDao {
      * @return the matchDBO object with the matchDBOId
      */
     @Query("SELECT * FROM matches where entry_id = :matchDBOId")
-    fun getMatchById(matchDBOId: String): MatchDBO?
+    fun getMatchById(matchDBOId: Long): MatchDBO?
 
     /**
      * Insert a MatchDBO in the database. If the MatchDBO already exists, replace it.

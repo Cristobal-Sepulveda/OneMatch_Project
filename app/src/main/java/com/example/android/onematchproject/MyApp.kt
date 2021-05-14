@@ -3,10 +3,13 @@ package com.example.android.onematchproject
 import android.app.Application
 import android.app.NotificationManager
 import androidx.core.content.ContextCompat
-import com.example.android.onematchproject.data.LocalDB
-import com.google.firebase.auth.FirebaseAuth
+import com.example.android.onematchproject.data.AppRepository
+import com.example.android.onematchproject.data.local.AppDataSource
+import com.example.android.onematchproject.data.local.LocalDB
+import com.example.android.onematchproject.ui.profile.ProfileViewModel
 import org.koin.dsl.module
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 
 class MyApp : Application() {
@@ -14,8 +17,21 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        /**
+         * using Koin Library as a service locator
+         */
         val myModule = module {
-            single { LocalDB.createMatchesDao(this@MyApp) }
+
+            //Declare singleton definitions to be later injected using by inject()
+            single {
+                ProfileViewModel(
+                    get(),
+                    get() as AppDataSource
+                )
+            }
+            single { LocalDB.createAppDB(this@MyApp).matchesDao() }
+            single { LocalDB.createAppDB(this@MyApp).userDao() }
+            single { AppRepository(get(), get()) as AppDataSource }
         }
 
         startKoin {
