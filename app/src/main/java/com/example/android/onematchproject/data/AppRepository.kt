@@ -14,11 +14,11 @@ import com.example.android.onematchproject.utils.Result
 /**
  * Concrete implementation of a data source as a db.
  * The repository is implemented so that you can focus on only testing it.
- * @param remindersDao the dao that does the Room db operations
+ * @param matchesDao the dao that does the Room db operations
+ * @param userDao the dao that does the Room db operations
  * @param ioDispatcher a coroutine dispatcher to offload the blocking IO tasks
  * */
 
-@Suppress("SENSELESS_COMPARISON")
 class AppRepository(private val matchesDao: MatchesDao,
                     private val userDao: UserDao,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AppDataSource {

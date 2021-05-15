@@ -7,4 +7,8 @@ object CommonVariables {
     const val TAG = "AuthenticationActivity"
     const val SIGN_IN_RESULT_CODE = 1001
     const val REQUEST_TURN_DEVICE_LOCATION_ON = 29
+    enum class ProviderType{
+        BASIC,
+        GOOGLE
+    }
 }
