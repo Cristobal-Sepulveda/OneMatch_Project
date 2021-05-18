@@ -2,9 +2,12 @@ package com.example.android.onematchproject.ui.map
 
 import android.Manifest
 import android.annotation.TargetApi
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.location.Location
 import android.net.Uri
 import android.os.Build
@@ -12,11 +15,13 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
-import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.R
+import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.databinding.FragmentMapBinding
 import com.example.android.onematchproject.ui.profile.ProfileViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -25,10 +30,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import org.koin.android.ext.android.inject
 
 
@@ -52,7 +57,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var lastKnownLocation: Location? = null
-
+    private val cloudDB = FirebaseFirestore.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -82,6 +87,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         getDeviceLocation()
         checkPermissionsAndGetDeviceLocation()
         setMapStyle(map)
+        markingFields()
         /*setPOIOrAnyPlaceOnClick(map)*/
 
     }
@@ -259,7 +265,47 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         return foregroundLocationApproved && backgroundPermissionApproved
     }
 
+    private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
+        val vectorDrawable = ContextCompat.getDrawable(context, vectorResId)
+        vectorDrawable!!.setBounds(
+            0,
+            0,
+            vectorDrawable.intrinsicWidth,
+            vectorDrawable.intrinsicHeight
+        )
+        val bitmap = Bitmap.createBitmap(
+            vectorDrawable.intrinsicWidth,
+            vectorDrawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        vectorDrawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
 
+    private fun markingFields(){
+        val fieldData= cloudDB.collection("field").get()
+
+        fieldData.addOnSuccessListener {
+            var i = 0
+            while(i < it.size()){
+                val geoPoint: GeoPoint = it.documents[i].get("location") as GeoPoint
+                val latlng = LatLng(geoPoint.latitude, geoPoint.longitude)
+                map.addMarker(MarkerOptions()
+                    .position(latlng)
+                    .title(it.documents[i].get("name") as String?)
+                    .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.ic_baseline_sports_soccer))
+                )
+                i++
+            }
+        }
+
+        cloudDB.collection("field").get().addOnFailureListener {
+            Toast.makeText(requireContext(), "Reload to see the fields", Toast.LENGTH_LONG).show()
+        }
+
+
+    }
     /*private fun setPOIOrAnyPlaceOnClick(map: GoogleMap) {
         map.setOnPoiClickListener { poi ->
             val snippet = String.format(

@@ -52,7 +52,7 @@ class ProfileFragment: BaseFragment() {
 
         popup.setOnMenuItemClickListener { menuItem: MenuItem ->
             println(firebaseAuth.currentUser.email)
-            cloudDB.collection("users")
+            cloudDB.collection("user")
                 .document(firebaseAuth.currentUser.email)
                 .set(hashMapOf("provider" to CommonVariables.ProviderType.BASIC.name,
                     "name" to firebaseAuth.currentUser.displayName,

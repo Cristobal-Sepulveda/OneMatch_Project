@@ -23,4 +23,21 @@
     <string name="option_defensa">Defensa</string>
     <string name="option_arquero">Arquero</string>
     <string name="posicion_predilecta">Posicion predilecta</string>
+    <string name="menu_single_field">Single_Field</string>
+    <string-array name="days">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sabado</item>
+        <item>Domingo</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sabado</item>
+        <item>Domingo</item>
+    </string-array>
 </resources>

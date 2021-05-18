@@ -23,4 +23,10 @@
         android:name="com.example.android.onematchproject.ui.profile.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nav_single_field"
+        android:name="com.example.android.onematchproject.ui.singleField.SingleFieldFragment"
+        android:label="@string/menu_single_field"
+        tools:layout="@layout/fragment_single_field"
+        />
 </navigation>

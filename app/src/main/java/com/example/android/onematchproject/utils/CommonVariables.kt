@@ -1,6 +1,7 @@
 package com.example.android.onematchproject.utils
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 object CommonVariables {
     val firebaseAuth = FirebaseAuth.getInstance()
