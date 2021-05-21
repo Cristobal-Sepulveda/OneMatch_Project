@@ -13,6 +13,9 @@ import com.example.android.onematchproject.databinding.FragmentSingleFieldBindin
 import com.example.android.onematchproject.ui.profile.ProfileViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.android.ext.android.inject
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SingleFieldFragment: BaseFragment() {
 
@@ -28,9 +31,29 @@ class SingleFieldFragment: BaseFragment() {
         binding.lifecycleOwner = this
 
         val days = resources.getStringArray(R.array.days)
+        var i = 0
+
+        while(i < getNextFourteenDaysFormattedDates().size) {
+            println(getNextFourteenDaysFormattedDates()[i])
+            days[i] = getNextFourteenDaysFormattedDates()[i]
+            i++
+        }
+
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, days)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
 
         return binding.root
+    }
+
+    private fun getNextFourteenDaysFormattedDates(): ArrayList<String> {
+        val formattedDateList = ArrayList<String>()
+        val calendar = Calendar.getInstance()
+        for (i in 0..13) {
+            val currentTime = calendar.time
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            formattedDateList.add(dateFormat.format(currentTime))
+            calendar.add(Calendar.DAY_OF_YEAR, 1)
+        }
+        return formattedDateList
     }
 }

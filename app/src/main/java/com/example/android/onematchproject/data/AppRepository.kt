@@ -10,6 +10,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.example.android.onematchproject.utils.Result
+import com.google.firebase.firestore.GeoPoint
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 /**
  * Concrete implementation of a data source as a db.
@@ -18,10 +21,9 @@ import com.example.android.onematchproject.utils.Result
  * @param userDao the dao that does the Room db operations
  * @param ioDispatcher a coroutine dispatcher to offload the blocking IO tasks
  * */
-
 class AppRepository(private val matchesDao: MatchesDao,
                     private val userDao: UserDao,
-                    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AppDataSource {
+                    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) : AppDataSource {
 
     override suspend fun getMatches(): Result<List<MatchDBO>> = withContext(ioDispatcher) {
         wrapEspressoIdlingResource {
@@ -89,5 +91,15 @@ class AppRepository(private val matchesDao: MatchesDao,
             }
         }
     }
+
+    override suspend fun savingFieldsFromTheCloud(listOfFields: ArrayList<GeoPoint>){
+        wrapEspressoIdlingResource {
+            withContext(ioDispatcher) {
+                matchesDao.saveMatchDBO()
+            }
+        }
+
+    }
+
 
 }

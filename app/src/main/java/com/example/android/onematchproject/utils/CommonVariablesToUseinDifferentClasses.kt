@@ -1,9 +1,10 @@
 package com.example.android.onematchproject.utils
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 
-object CommonVariables {
+object CommonVariablesToUseinDifferentClasses {
     val firebaseAuth = FirebaseAuth.getInstance()
     const val TAG = "AuthenticationActivity"
     const val SIGN_IN_RESULT_CODE = 1001
@@ -12,4 +13,5 @@ object CommonVariables {
         BASIC,
         GOOGLE
     }
+    lateinit  var fieldData: Task<QuerySnapshot>
 }

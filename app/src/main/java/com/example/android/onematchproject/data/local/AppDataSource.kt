@@ -5,6 +5,10 @@ import com.example.android.onematchproject.data.dbo.UserDBO
 import com.example.android.onematchproject.utils.Result
 
 interface AppDataSource {
+
+    /**
+     * Methods to interact with the local database
+     * */
     suspend fun getMatches(): Result<List<MatchDBO>>
     suspend fun getMatch(id: Long): Result<MatchDBO>
     suspend fun saveMatch(match: MatchDBO)
@@ -12,4 +16,5 @@ interface AppDataSource {
     suspend fun getUser(id: Long): Result<UserDBO>
     suspend fun saveUser(user: UserDBO)
     suspend fun deleteUser()
+    suspend fun savingFieldsFromTheCloud()
 }

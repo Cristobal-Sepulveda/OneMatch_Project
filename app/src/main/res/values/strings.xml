@@ -24,20 +24,29 @@
     <string name="option_arquero">Arquero</string>
     <string name="posicion_predilecta">Posicion predilecta</string>
     <string name="menu_single_field">Single_Field</string>
+    <string name="seleccione_dia_de_interes">Seleccione Día de Interes</string>
+    <string name="five_to_six">17:00 - 18:00</string>
+    <string name="six_to_seven">18:00 - 19:00</string>
+    <string name="seven_to_eight">19:00 - 20:00</string>
+    <string name="eight_to_nine">20:00 - 21:00</string>
+    <string name="jugadores">Jugadores</string>
+    <string name="equipo_1">Equipo 1</string>
+    <string name="equipo_2">Equipo 2</string>
+    <string name="elija_horario_de_interes">Elija horario de interes</string>
     <string-array name="days">
-        <item>Lunes</item>
-        <item>Martes</item>
-        <item>Miercoles</item>
-        <item>Jueves</item>
-        <item>Viernes</item>
-        <item>Sabado</item>
-        <item>Domingo</item>
-        <item>Lunes</item>
-        <item>Martes</item>
-        <item>Miercoles</item>
-        <item>Jueves</item>
-        <item>Viernes</item>
-        <item>Sabado</item>
-        <item>Domingo</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
     </string-array>
 </resources>

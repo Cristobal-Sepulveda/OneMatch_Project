@@ -1,7 +1,7 @@
 package com.example.android.onematchproject.ui.home
 
 import androidx.lifecycle.ViewModel
-import com.example.android.onematchproject.utils.CommonVariables.firebaseAuth
+import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.firebaseAuth
 
 class HomeViewModel : ViewModel() {
 

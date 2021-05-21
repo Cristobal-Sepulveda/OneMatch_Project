@@ -22,8 +22,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
+import com.example.android.onematchproject.data.AppRepository
 import com.example.android.onematchproject.databinding.FragmentMapBinding
 import com.example.android.onematchproject.ui.profile.ProfileViewModel
+import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses
+import com.example.android.onematchproject.utils.NavigationCommand
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -32,7 +35,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import org.koin.android.ext.android.inject
 
@@ -57,7 +59,6 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var lastKnownLocation: Location? = null
-    private val cloudDB = FirebaseFirestore.getInstance()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -85,11 +86,10 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         getDeviceLocation()
-        checkPermissionsAndGetDeviceLocation()
+            checkPermissionsAndGetDeviceLocation()
         setMapStyle(map)
         markingFields()
-        /*setPOIOrAnyPlaceOnClick(map)*/
-
+        onFieldSelected()
     }
 
     private fun setMapStyle(map: GoogleMap) {
@@ -284,8 +284,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun markingFields(){
-        val fieldData= cloudDB.collection("field").get()
-
+        val fieldData = CommonVariablesToUseinDifferentClasses.fieldData
         fieldData.addOnSuccessListener {
             var i = 0
             while(i < it.size()){
@@ -300,106 +299,21 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
             }
         }
 
-        cloudDB.collection("field").get().addOnFailureListener {
+        fieldData.addOnFailureListener {
             Toast.makeText(requireContext(), "Reload to see the fields", Toast.LENGTH_LONG).show()
         }
-
-
-    }
-    /*private fun setPOIOrAnyPlaceOnClick(map: GoogleMap) {
-        map.setOnPoiClickListener { poi ->
-            val snippet = String.format(
-                    Locale.getDefault(),
-                    "Lat: %1$.5f, Long: %2$.5f",
-                    poi.latLng.latitude,
-                    poi.latLng.longitude
-            )
-            if (_viewModel.selectedPOICount.value == null) {
-                map.clear()
-                val markerOnPOI = map.addMarker(
-                        MarkerOptions()
-                                .position(poi.latLng)
-                                .title(poi.name)
-                                .snippet(snippet)
-                )
-                markerOnPOI.showInfoWindow()
-                _viewModel.selectedPOICount.value = 1
-                _viewModel.latitude.value = poi.latLng.latitude
-                _viewModel.longitude.value = poi.latLng.longitude
-                _viewModel.reminderSelectedLocationStr.value = poi.name
-            }
-            else{
-                map.clear()
-                val markerOnPOI = map.addMarker(
-                        MarkerOptions()
-                                .position(poi.latLng)
-                                .title(poi.name)
-                                .snippet(snippet)
-                )
-                markerOnPOI.showInfoWindow()
-                _viewModel.latitude.value = poi.latLng.latitude
-                _viewModel.longitude.value = poi.latLng.longitude
-                _viewModel.reminderSelectedLocationStr.value = poi.name
-            }
-        }
-
-        map.setOnMapClickListener {
-            val snippet = String.format(
-                Locale.getDefault(),
-                "Lat: %1$.5f, Long: %2$.5f",
-                it.latitude,
-                it.longitude
-            )
-            if (_viewModel.selectedPOICount.value == null) {
-                map.clear()
-                val mapMarker = map.addMarker(
-                        MarkerOptions()
-                                .position(it)
-                                .title("${it.latitude} - ${it.longitude}")
-                                .snippet(snippet)
-                )
-                mapMarker.showInfoWindow()
-                _viewModel.selectedPOICount.value = 1
-                _viewModel.latitude.value = it.latitude
-                _viewModel.longitude.value = it.longitude
-                _viewModel.reminderSelectedLocationStr.value = "${it.latitude} -- ${it.longitude}"
-            }
-            else{
-                map.clear()
-                val markerOnPlace = map.addMarker(
-                        MarkerOptions()
-                                .position(it)
-                                .title("${it.latitude} - ${it.longitude}")
-                                .snippet(snippet)
-                )
-                markerOnPlace.showInfoWindow()
-                _viewModel.latitude.value = it.latitude
-                _viewModel.longitude.value = it.longitude
-                _viewModel.reminderSelectedLocationStr.value = "${it.latitude} -- ${it.longitude}"
-            }
-        }
-
     }
 
-    private fun onLocationSelected() {
-        when (_viewModel.selectedPOICount.value) {
-            null -> {
-                Toast.makeText(requireActivity().applicationContext,
-                        "You need to select any place before to save something",
-                        Toast.LENGTH_LONG).show()
-            }
+    private fun onFieldSelected() {
             //        TODO: When the user confirms on the selected location,
             //         send back the selected location details to the view model
             //         and navigate back to the previous fragment to save the reminder and add the geofence
-            else -> {
-                //Navigate to another fragment to get the user location
-                _viewModel.navigationCommand.value =
-                        NavigationCommand.To(
-                                SelectLocationFragmentDirections.
-                                actionSelectLocationFragmentToSaveReminderFragment()
-                        )
-            }
+        map.setOnMarkerClickListener {
+            _viewModel.navigationCommand.value =
+                NavigationCommand.To(MapFragmentDirections.actionNavMapToNavSingleField())
+            true
         }
-    }*/
+    }
 }
+
 
