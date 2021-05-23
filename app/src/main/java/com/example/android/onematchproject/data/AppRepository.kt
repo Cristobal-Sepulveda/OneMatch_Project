@@ -1,8 +1,12 @@
 package com.example.android.onematchproject.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.android.onematchproject.data.dbo.FieldDBO
 import com.example.android.onematchproject.data.dbo.MatchDBO
 import com.example.android.onematchproject.data.dbo.UserDBO
 import com.example.android.onematchproject.data.local.AppDataSource
+import com.example.android.onematchproject.data.local.FieldDao
 import com.example.android.onematchproject.data.local.MatchesDao
 import com.example.android.onematchproject.data.local.UserDao
 import com.example.android.onematchproject.utils.EspressoIdlingResource.wrapEspressoIdlingResource
@@ -10,9 +14,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.example.android.onematchproject.utils.Result
-import com.google.firebase.firestore.GeoPoint
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 /**
  * Concrete implementation of a data source as a db.
@@ -23,6 +24,7 @@ import org.koin.core.inject
  * */
 class AppRepository(private val matchesDao: MatchesDao,
                     private val userDao: UserDao,
+                    private val fieldDao: FieldDao,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) : AppDataSource {
 
     override suspend fun getMatches(): Result<List<MatchDBO>> = withContext(ioDispatcher) {
@@ -92,13 +94,25 @@ class AppRepository(private val matchesDao: MatchesDao,
         }
     }
 
-    override suspend fun savingFieldsFromTheCloud(listOfFields: ArrayList<GeoPoint>){
+    override suspend fun savingFieldToLocalDatabase(fieldDBO: FieldDBO) {
         wrapEspressoIdlingResource {
-            withContext(ioDispatcher) {
-                matchesDao.saveMatchDBO()
+            withContext(ioDispatcher){
+                fieldDao.saveFieldDBO(fieldDBO)
             }
         }
+    }
 
+    override suspend fun gettingFieldsFromDatabase(): List<FieldDBO> =  withContext(ioDispatcher){
+        wrapEspressoIdlingResource {
+             try {
+                 val list = Result.Success(fieldDao.gettingFieldsFromDatabase())
+                 return@withContext list.data
+            } catch (ex: Exception) {
+                val listError : List<FieldDBO> = listOf()
+                Result.Error(ex.localizedMessage)
+                 return@withContext listError
+            }
+        }
     }
 
 

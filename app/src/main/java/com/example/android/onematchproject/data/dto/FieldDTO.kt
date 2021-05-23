@@ -20,6 +20,7 @@ fun FieldDTO.asDataBaseModel(fieldDTO: FieldDTO): FieldDBO {
         entry_id = fieldDTO.entry_id,
         field_name = fieldDTO.field_name,
         field_address = fieldDTO.field_address,
-        field_geopoint = fieldDTO.field_geopoint
+        field_geopoint_latitude = fieldDTO.field_geopoint.latitude,
+        field_geopoint_longitude = fieldDTO.field_geopoint.longitude
     )
 }

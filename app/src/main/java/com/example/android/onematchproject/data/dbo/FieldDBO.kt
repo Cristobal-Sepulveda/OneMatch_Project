@@ -13,5 +13,7 @@ data class FieldDBO(
 
     val field_address: String,
 
-    val field_geopoint: GeoPoint
+    val field_geopoint_latitude: Double,
+
+    val field_geopoint_longitude: Double
 )

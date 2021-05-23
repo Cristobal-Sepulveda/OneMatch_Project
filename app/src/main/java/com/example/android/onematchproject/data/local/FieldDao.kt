@@ -1,10 +1,13 @@
 package com.example.android.onematchproject.data.local
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.android.onematchproject.data.dbo.FieldDBO
+import com.example.android.onematchproject.data.dto.FieldDTO
 
 @Dao
 interface FieldDao {
@@ -14,7 +17,7 @@ interface FieldDao {
      */
 
     @Query("SELECT * FROM fields")
-    fun getFields(): List<FieldDBO>
+    fun gettingFieldsFromDatabase(): List<FieldDBO>
 
     /**
      * Insert a FieldDBO in the database. If the FieldDBO already exists, replace it.

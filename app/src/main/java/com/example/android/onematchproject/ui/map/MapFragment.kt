@@ -15,17 +15,15 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
-import com.example.android.onematchproject.data.AppRepository
 import com.example.android.onematchproject.databinding.FragmentMapBinding
 import com.example.android.onematchproject.ui.profile.ProfileViewModel
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses
 import com.example.android.onematchproject.utils.NavigationCommand
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -35,14 +33,12 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.GeoPoint
 import org.koin.android.ext.android.inject
-
 
 class MapFragment() : BaseFragment(), OnMapReadyCallback {
 
     //Use Koin to get the view model of the ProfileViewModel
-    override val _viewModel: ProfileViewModel by inject()
+    override val _viewModel: MapViewModel by inject()
 
     private lateinit var binding: FragmentMapBinding
     private val defaultLocation = LatLng(-33.8523341, 151.2106085)
@@ -64,21 +60,20 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_map,
-            container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
 
-//        TODO: add the map setup implementation
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.lifecycleOwner = this
+
+        //Adding  the map setup implementation
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         // Construct a FusedLocationProviderClient.
-        fusedLocationProviderClient = LocationServices
-            .getFusedLocationProviderClient(requireActivity())
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        binding.selectFieldButton.setOnClickListener {
-            /*onLocationSelected()*/
-        }
+        _viewModel.getFields()
 
         return binding.root
     }
@@ -86,10 +81,15 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         getDeviceLocation()
-            checkPermissionsAndGetDeviceLocation()
+        checkPermissionsAndGetDeviceLocation()
         setMapStyle(map)
-        markingFields()
-        onFieldSelected()
+        _viewModel.listHaveData.observe(viewLifecycleOwner, Observer{
+            if(it){
+                markingFields()
+                _viewModel.onDrawComplete()
+            }
+
+        })
     }
 
     private fun setMapStyle(map: GoogleMap) {
@@ -284,24 +284,20 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun markingFields(){
-        val fieldData = CommonVariablesToUseinDifferentClasses.fieldData
-        fieldData.addOnSuccessListener {
-            var i = 0
-            while(i < it.size()){
-                val geoPoint: GeoPoint = it.documents[i].get("location") as GeoPoint
-                val latlng = LatLng(geoPoint.latitude, geoPoint.longitude)
-                map.addMarker(MarkerOptions()
-                    .position(latlng)
-                    .title(it.documents[i].get("name") as String?)
-                    .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.ic_baseline_sports_soccer))
-                )
-                i++
-            }
+        Log.i("Launched", "markingFields")
+        val fields = _viewModel.listOfFields
+        var i = 0
+        while(i < fields.size){
+            val field = fields[i]
+            val latlng = LatLng(field.field_geopoint_latitude, field.field_geopoint_longitude)
+            map.addMarker(MarkerOptions()
+                .position(latlng)
+                .title(field.field_name)
+                .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.ic_baseline_sports_soccer))
+            )
+            i++
         }
-
-        fieldData.addOnFailureListener {
-            Toast.makeText(requireContext(), "Reload to see the fields", Toast.LENGTH_LONG).show()
-        }
+        _viewModel.onDrawComplete()
     }
 
     private fun onFieldSelected() {

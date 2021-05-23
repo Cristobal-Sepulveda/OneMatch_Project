@@ -9,7 +9,7 @@ import androidx.room.Room
  */
 object LocalDB {
     /**
-     * static method that creates the app class and returns the DAO of the reminder
+     * static method that creates the app class and returns the DAO's
      */
     fun createAppDB(context: Context): AppDatabase {
         return Room.databaseBuilder(
