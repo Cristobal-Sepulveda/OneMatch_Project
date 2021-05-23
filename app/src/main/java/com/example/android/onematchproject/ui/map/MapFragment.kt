@@ -73,6 +73,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        //here we get the info from the database or the cloudfirestore
         _viewModel.getFields()
 
         return binding.root
@@ -83,13 +84,13 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         getDeviceLocation()
         checkPermissionsAndGetDeviceLocation()
         setMapStyle(map)
-        _viewModel.listHaveData.observe(viewLifecycleOwner, Observer{
+        _viewModel.listHaveData.observe(viewLifecycleOwner,{
             if(it){
                 markingFields()
                 _viewModel.onDrawComplete()
             }
-
         })
+        onFieldSelected()
     }
 
     private fun setMapStyle(map: GoogleMap) {
@@ -283,6 +284,13 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
+    /**
+     * This method is used in onMapReady() and is unchain before we get the field's info from the LOCAL_DATABASE.
+     * IF WE DONT HAVE DATA THERE, we GET THE DATA FROM CLOUDFIRESTORE and save it in LOCAL_DATABASE. This reduce the
+     * consults to the cloud database.
+     *
+     * For more info, watch how works the method getFields(). Its used in this fragment  in onCreateView
+     */
     private fun markingFields(){
         Log.i("Launched", "markingFields")
         val fields = _viewModel.listOfFields
@@ -301,9 +309,6 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun onFieldSelected() {
-            //        TODO: When the user confirms on the selected location,
-            //         send back the selected location details to the view model
-            //         and navigate back to the previous fragment to save the reminder and add the geofence
         map.setOnMarkerClickListener {
             _viewModel.navigationCommand.value =
                 NavigationCommand.To(MapFragmentDirections.actionNavMapToNavSingleField())

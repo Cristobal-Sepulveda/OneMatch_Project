@@ -29,6 +29,7 @@ class MapViewModel(
         get() = _listHaveData
 
     val cloudDB = FirebaseFirestore.getInstance()
+
     fun getFields(){
         viewModelScope.launch{
             Log.i("Launched", "getFields")
