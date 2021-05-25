@@ -1,13 +1,10 @@
-package com.example.android.onematchproject.data.local
+package com.example.android.onematchproject.data.dao
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.android.onematchproject.data.dbo.FieldDBO
-import com.example.android.onematchproject.data.dto.FieldDTO
+import com.example.android.onematchproject.data.dataclass.dbo.FieldDBO
 
 @Dao
 interface FieldDao {

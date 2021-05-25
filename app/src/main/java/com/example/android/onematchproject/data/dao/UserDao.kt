@@ -1,7 +1,7 @@
-package com.example.android.onematchproject.data.local
+package com.example.android.onematchproject.data.dao
 
 import androidx.room.*
-import com.example.android.onematchproject.data.dbo.UserDBO
+import com.example.android.onematchproject.data.dataclass.dbo.UserDBO
 
 @Dao
 interface UserDao {

@@ -1,14 +1,14 @@
 package com.example.android.onematchproject.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.android.onematchproject.data.dbo.FieldDBO
-import com.example.android.onematchproject.data.dbo.MatchDBO
-import com.example.android.onematchproject.data.dbo.UserDBO
+import com.example.android.onematchproject.data.dao.DayDao
+import com.example.android.onematchproject.data.dataclass.dbo.FieldDBO
+import com.example.android.onematchproject.data.dataclass.dbo.MatchDBO
+import com.example.android.onematchproject.data.dataclass.dbo.UserDBO
 import com.example.android.onematchproject.data.local.AppDataSource
-import com.example.android.onematchproject.data.local.FieldDao
-import com.example.android.onematchproject.data.local.MatchesDao
-import com.example.android.onematchproject.data.local.UserDao
+import com.example.android.onematchproject.data.dao.FieldDao
+import com.example.android.onematchproject.data.dao.MatchesDao
+import com.example.android.onematchproject.data.dao.UserDao
+import com.example.android.onematchproject.data.dataclass.dbo.DayDBO
 import com.example.android.onematchproject.utils.EspressoIdlingResource.wrapEspressoIdlingResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -25,8 +25,44 @@ import com.example.android.onematchproject.utils.Result
 class AppRepository(private val matchesDao: MatchesDao,
                     private val userDao: UserDao,
                     private val fieldDao: FieldDao,
+                    private val dayDao: DayDao,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) : AppDataSource {
 
+    /**
+     *Saving Methods
+     */
+    override suspend fun savingFieldToLocalDatabase(fieldDBO: FieldDBO) {
+        wrapEspressoIdlingResource {
+            withContext(ioDispatcher){
+                fieldDao.saveFieldDBO(fieldDBO)
+            }
+        }
+    }
+    override suspend fun saveMatch(match: MatchDBO) {
+        wrapEspressoIdlingResource {
+            withContext(ioDispatcher) {
+                matchesDao.saveMatchDBO(match)
+            }
+        }
+    }
+    override suspend fun saveUser(user: UserDBO) {
+        wrapEspressoIdlingResource {
+            withContext(ioDispatcher) {
+                userDao.saveUserDBO(user)
+            }
+        }
+    }
+    override suspend fun savingASingleDayOfTheCalendarFromCloudFirestore(dayDBO: DayDBO) {
+        wrapEspressoIdlingResource {
+            withContext(ioDispatcher){
+                dayDao.saveDayDBO(dayDBO)
+            }
+        }
+    }
+
+    /**
+     *Getting Methods
+     */
     override suspend fun getMatches(): Result<List<MatchDBO>> = withContext(ioDispatcher) {
         wrapEspressoIdlingResource {
             return@withContext try {
@@ -36,7 +72,6 @@ class AppRepository(private val matchesDao: MatchesDao,
             }
         }
     }
-
     override suspend fun getMatch(id: Long): Result<MatchDBO> = withContext(ioDispatcher) {
         wrapEspressoIdlingResource {
             try {
@@ -51,23 +86,6 @@ class AppRepository(private val matchesDao: MatchesDao,
             }
         }
     }
-
-    override suspend fun saveMatch(match: MatchDBO) {
-        wrapEspressoIdlingResource {
-            withContext(ioDispatcher) {
-                matchesDao.saveMatchDBO(match)
-            }
-        }
-    }
-
-    override suspend fun deleteAllMatches() {
-        wrapEspressoIdlingResource {
-            withContext(ioDispatcher) {
-                matchesDao.deleteAllMatches()
-            }
-        }
-    }
-
     override suspend fun getUser(id: Long): Result<UserDBO> = withContext(ioDispatcher){
         wrapEspressoIdlingResource {
             return@withContext try {
@@ -77,15 +95,22 @@ class AppRepository(private val matchesDao: MatchesDao,
             }
         }
     }
-
-    override suspend fun saveUser(user: UserDBO) {
+    override suspend fun gettingFieldsFromDatabase(): List<FieldDBO> =  withContext(ioDispatcher){
         wrapEspressoIdlingResource {
-            withContext(ioDispatcher) {
-                userDao.saveUserDBO(user)
+            try {
+                val list = Result.Success(fieldDao.gettingFieldsFromDatabase())
+                return@withContext list.data
+            } catch (ex: Exception) {
+                val listError : List<FieldDBO> = listOf()
+                Result.Error(ex.localizedMessage)
+                return@withContext listError
             }
         }
     }
 
+    /**
+     *Deleting Methods
+     */
     override suspend fun deleteUser() {
         wrapEspressoIdlingResource {
             withContext(ioDispatcher) {
@@ -93,27 +118,11 @@ class AppRepository(private val matchesDao: MatchesDao,
             }
         }
     }
-
-    override suspend fun savingFieldToLocalDatabase(fieldDBO: FieldDBO) {
+    override suspend fun deleteAllMatches() {
         wrapEspressoIdlingResource {
-            withContext(ioDispatcher){
-                fieldDao.saveFieldDBO(fieldDBO)
+            withContext(ioDispatcher) {
+                matchesDao.deleteAllMatches()
             }
         }
     }
-
-    override suspend fun gettingFieldsFromDatabase(): List<FieldDBO> =  withContext(ioDispatcher){
-        wrapEspressoIdlingResource {
-             try {
-                 val list = Result.Success(fieldDao.gettingFieldsFromDatabase())
-                 return@withContext list.data
-            } catch (ex: Exception) {
-                val listError : List<FieldDBO> = listOf()
-                Result.Error(ex.localizedMessage)
-                 return@withContext listError
-            }
-        }
-    }
-
-
 }

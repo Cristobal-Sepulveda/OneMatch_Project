@@ -2,9 +2,13 @@ package com.example.android.onematchproject.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.android.onematchproject.data.dbo.FieldDBO
-import com.example.android.onematchproject.data.dbo.MatchDBO
-import com.example.android.onematchproject.data.dbo.UserDBO
+import com.example.android.onematchproject.data.dao.DayDao
+import com.example.android.onematchproject.data.dao.FieldDao
+import com.example.android.onematchproject.data.dao.MatchesDao
+import com.example.android.onematchproject.data.dao.UserDao
+import com.example.android.onematchproject.data.dataclass.dbo.FieldDBO
+import com.example.android.onematchproject.data.dataclass.dbo.MatchDBO
+import com.example.android.onematchproject.data.dataclass.dbo.UserDBO
 
 /**
  * The Room Database that contains the reminders table.
@@ -14,4 +18,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun matchesDao(): MatchesDao
     abstract fun userDao(): UserDao
     abstract fun fieldDao(): FieldDao
+    abstract fun dayDao(): DayDao
 }

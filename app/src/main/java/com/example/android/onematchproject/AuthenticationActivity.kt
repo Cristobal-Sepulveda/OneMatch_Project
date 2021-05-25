@@ -7,10 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.android.onematchproject.data.dto.FieldDTO
-import com.example.android.onematchproject.data.dto.asDataBaseModel
-import com.example.android.onematchproject.data.local.AppDatabase
-import com.example.android.onematchproject.data.local.LocalDB
 import com.example.android.onematchproject.databinding.ActivityAuthenticationBinding
 import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.REQUEST_TURN_DEVICE_LOCATION_ON
 import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.SIGN_IN_RESULT_CODE
@@ -24,10 +20,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.GeoPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /**
  * This class should be the starting point of the app, It asks the users to sign in / register, and redirects the

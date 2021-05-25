@@ -1,4 +1,4 @@
-package com.example.android.onematchproject.data.dbo
+package com.example.android.onematchproject.data.dataclass.dbo
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

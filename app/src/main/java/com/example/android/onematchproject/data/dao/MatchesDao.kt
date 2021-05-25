@@ -1,10 +1,10 @@
-package com.example.android.onematchproject.data.local
+package com.example.android.onematchproject.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.android.onematchproject.data.dbo.MatchDBO
+import com.example.android.onematchproject.data.dataclass.dbo.MatchDBO
 
 /**
  * Data Access Object for the matches table.

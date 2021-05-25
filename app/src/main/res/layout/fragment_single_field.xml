@@ -7,7 +7,7 @@
     <data>
         <variable
             name = "viewModel"
-            type = "com.example.android.onematchproject.ui.profile.ProfileViewModel" />
+            type = "com.example.android.onematchproject.ui.singleField.SingleFieldViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="none"
-                android:text="@string/seleccione_dia_de_interes" />
+                android:hint="@string/seleccione_dia_de_interes" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

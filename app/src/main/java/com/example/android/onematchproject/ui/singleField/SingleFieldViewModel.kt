@@ -1,12 +1,10 @@
-package com.example.android.onematchproject.ui.map
+package com.example.android.onematchproject.ui.singleField
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.android.onematchproject.base.BaseViewModel
-import com.example.android.onematchproject.data.dataclass.dbo.FieldDBO
+import com.example.android.onematchproject.data.dataclass.dbo.DayDBO
 import com.example.android.onematchproject.data.dataclass.dto.FieldDTO
 import com.example.android.onematchproject.data.dataclass.dto.asDataBaseModel
 import com.example.android.onematchproject.data.local.AppDataSource
@@ -16,13 +14,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MapViewModel(
-    val app: Application, val dataSource: AppDataSource) : BaseViewModel(app) {
-    var listOfFields: List<FieldDBO> = listOf()
-
-    private val _listHaveData = MutableLiveData(false)
-    val listHaveData: LiveData<Boolean>
-        get() = _listHaveData
+class SingleFieldViewModel(val app: Application,
+                           val dataSource: AppDataSource, ) : BaseViewModel(app) {
 
     val cloudDB = FirebaseFirestore.getInstance()
 
@@ -51,35 +44,30 @@ class MapViewModel(
      * never will lose this data, and the consults to the database are less
      * - we use this data in MapFragment, markingFields() method -
      **/
-    suspend fun gettingFieldsFromCloudFirestore() {
-        val comuna = cloudDB.collection("MAIPU").get()
-        comuna.addOnSuccessListener {
-            Log.i("Launched", "GettingFieldsFromCloudFirestore")
-            var i = 0
-            while (i < it.size()) {
-                val singleFieldInfo = it.documents[i].get("field_info") as ArrayList<*>
-                val fieldDTO = FieldDTO(
-                   i + 1,
-                    singleFieldInfo[0] as String,
-                    singleFieldInfo[1] as String,
-                    singleFieldInfo[2] as GeoPoint
-                )
-                viewModelScope.launch{
-                    withContext(Dispatchers.IO) {
-                        dataSource.savingFieldToLocalDatabase(fieldDTO.asDataBaseModel(fieldDTO))
-                    }
-                }
-                i++
+    fun gettingDaysCalendarFromCloudFirestore(day: Int, date: String) {
+        Log.i("Launched", "GettingDaysCalendarFromCloudFirestore")
+        val daysAvailableInCalendar = cloudDB.collection("MAIPU")
+            .document("2")
+            .collection("CALENDARIO").get()
+
+        daysAvailableInCalendar.addOnSuccessListener {
+            val singleDayCalendar = it.documents[day]
+            val dayDBO = DayDBO(
+                day,
+                date,
+                singleDayCalendar.get("five_to_six") as Array<String>,
+                singleDayCalendar.get("six_to_seven") as Array<String>,
+                singleDayCalendar.get("seven_to_eight") as Array<String>,
+                singleDayCalendar.get("eight_to_nine") as Array<String>,
+                singleDayCalendar.get("nine_to_eight") as Array<String>
+            )
+
+            viewModelScope.launch {
+                dataSource.savingASingleDayOfTheCalendarFromCloudFirestore(dayDBO)
             }
-            Log.i("Launched", "GettingFieldsFromCloudFirestore EXIT")
         }
 
-        comuna.addOnFailureListener {
+        daysAvailableInCalendar.addOnFailureListener {
         }
-
-    }
-
-    fun onDrawComplete(){
-        _listHaveData.value = false
     }
 }

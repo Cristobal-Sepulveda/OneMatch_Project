@@ -1,7 +1,7 @@
-package com.example.android.onematchproject.data.dto
+package com.example.android.onematchproject.data.dataclass.dto
 
 import androidx.room.Entity
-import com.example.android.onematchproject.data.dbo.FieldDBO
+import com.example.android.onematchproject.data.dataclass.dbo.FieldDBO
 import com.google.firebase.firestore.GeoPoint
 
 @Entity
