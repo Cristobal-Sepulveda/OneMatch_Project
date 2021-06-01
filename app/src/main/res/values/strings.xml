@@ -33,6 +33,10 @@
     <string name="equipo_1">Equipo 1</string>
     <string name="equipo_2">Equipo 2</string>
     <string name="elija_horario_de_interes">Elija horario de interes</string>
+    <string name="select_a_comuna">Select a Comuna</string>
+    <string name="comuna_maipu">Maipu</string>
+    <string name="comuna_estacion_central">Estacion Central</string>
+    <string name="comuna_santiago_centro">Santiago Centro</string>
     <string-array name="days">
         <item></item>
         <item></item>

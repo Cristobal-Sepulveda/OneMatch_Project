@@ -142,41 +142,41 @@
                     android:background="@drawable/separator" />
 
                 <TextView
+                    android:id="@+id/player0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />
 
                 <TextView
+                    android:id="@+id/player1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />
 
                 <TextView
+                    android:id="@+id/player2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />
 
                 <TextView
+                    android:id="@+id/player3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />
 
                 <TextView
+                    android:id="@+id/player4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />
@@ -199,41 +199,41 @@
                     android:background="@drawable/separator" />
 
                 <TextView
+                    android:id="@+id/player5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />
 
                 <TextView
+                    android:id="@+id/player6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />
 
                 <TextView
+                    android:id="@+id/player7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />
 
                 <TextView
+                    android:id="@+id/player8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />
 
                 <TextView
+                    android:id="@+id/player9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal"
                     tools:text="@string/jugadores" />

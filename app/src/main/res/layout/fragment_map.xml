@@ -4,19 +4,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-<!--
     <data>
-
         <variable
             name="viewModel"
-            type="com.udacity.project4.ui.saveReminderFragment.SaveReminderViewModel" />
+            type="com.example.android.onematchproject.ui.map.MapViewModel" />
     </data>
--->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mapLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/selectAComuna_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_a_comuna"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
         <!--TODO: Add the map fragment for the user to select the location-->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/map"
@@ -25,21 +35,10 @@
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/selectField_button"
-            />
-        <Button
-            android:id="@+id/selectField_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:textColor="@color/white"
-            android:textSize="26sp"
-            android:background="@color/teal_700"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selectAComuna_button"
             app:layout_constraintBottom_toBottomOf="parent"
             />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

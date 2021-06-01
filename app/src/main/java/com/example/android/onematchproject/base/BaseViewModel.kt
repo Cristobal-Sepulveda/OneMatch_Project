@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.android.onematchproject.utils.NavigationCommand
 import com.example.android.onematchproject.utils.SingleLiveEvent
+import com.google.firebase.firestore.EventListener
 
 /**
  * Base class for View Models to declare the common LiveData objects in one place

@@ -3,10 +3,8 @@ package com.example.android.onematchproject
 import android.app.Application
 import android.app.NotificationManager
 import androidx.core.content.ContextCompat
+import com.example.android.onematchproject.data.AppDataSource
 import com.example.android.onematchproject.data.AppRepository
-import com.example.android.onematchproject.data.local.AppDataSource
-import com.example.android.onematchproject.data.local.AppDatabase
-import com.example.android.onematchproject.data.local.LocalDB
 import com.example.android.onematchproject.ui.map.MapViewModel
 import com.example.android.onematchproject.ui.profile.ProfileViewModel
 import com.example.android.onematchproject.ui.singleField.SingleFieldViewModel
@@ -15,7 +13,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class MyApp : Application() {
-
     override fun onCreate() {
         super.onCreate()
 
@@ -43,11 +40,8 @@ class MyApp : Application() {
                     get() as AppDataSource
                 )
             }
-            single { LocalDB.createAppDB(this@MyApp).matchesDao() }
-            single { LocalDB.createAppDB(this@MyApp).userDao() }
-            single { LocalDB.createAppDB(this@MyApp).fieldDao() }
-            single { LocalDB.createAppDB(this@MyApp).dayDao()}
-            single { AppRepository(get(), get(), get(),get ()) as AppDataSource }
+            single{ AppRepository() as AppDataSource}
+
         }
 
         startKoin {

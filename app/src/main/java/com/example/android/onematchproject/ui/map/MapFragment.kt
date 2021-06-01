@@ -15,15 +15,15 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.*
+import androidx.annotation.MenuRes
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.databinding.FragmentMapBinding
-import com.example.android.onematchproject.ui.profile.ProfileViewModel
 import com.example.android.onematchproject.utils.NavigationCommand
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -33,11 +33,12 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.GeoPoint
 import org.koin.android.ext.android.inject
 
 class MapFragment() : BaseFragment(), OnMapReadyCallback {
 
-    //Use Koin to get the view model of the ProfileViewModel
+    //Use Koin to get the view model of the MapViewModel
     override val _viewModel: MapViewModel by inject()
 
     private lateinit var binding: FragmentMapBinding
@@ -56,6 +57,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var lastKnownLocation: Location? = null
 
+    @ExperimentalStdlibApi
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -73,10 +75,23 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        //here we get the info from the database or the cloudfirestore
-        _viewModel.getFields()
+        binding.selectAComunaButton.setOnClickListener{v: View ->
+            showMenu(v, R.menu.comunas_popup_menu)
+        }
 
         return binding.root
+    }
+
+    @ExperimentalStdlibApi
+    private fun showMenu(v: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(requireContext(), v)
+        popup.menuInflater.inflate(menuRes, popup.menu)
+        popup.show()
+
+        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+            _viewModel.gettingListOfFields_FromCloudFirestore(menuItem.title.toString())
+            true
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -84,13 +99,12 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         getDeviceLocation()
         checkPermissionsAndGetDeviceLocation()
         setMapStyle(map)
-        _viewModel.listHaveData.observe(viewLifecycleOwner,{
-            if(it){
+        onFieldSelected()
+        _viewModel.listOfFields.observe(viewLifecycleOwner,{
+            if(!it.isNullOrEmpty()){
                 markingFields()
-                _viewModel.onDrawComplete()
             }
         })
-        onFieldSelected()
     }
 
     private fun setMapStyle(map: GoogleMap) {
@@ -294,13 +308,15 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     private fun markingFields(){
         Log.i("Launched", "markingFields")
         val fields = _viewModel.listOfFields
+        Log.i("Launched", "markingFields: ${fields.value}")
         var i = 0
-        while(i < fields.size){
-            val field = fields[i]
-            val latlng = LatLng(field.field_geopoint_latitude, field.field_geopoint_longitude)
+        while(i < fields.value!!.size){
+            val field = fields.value!![i] as ArrayList<*>
+            val fieldGeoPoint = field[2] as GeoPoint
+            val latLng = LatLng(fieldGeoPoint.latitude, fieldGeoPoint.longitude)
             map.addMarker(MarkerOptions()
-                .position(latlng)
-                .title(field.field_name)
+                .position(latLng)
+                .title(field[0] as String?)
                 .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.ic_baseline_sports_soccer))
             )
             i++
