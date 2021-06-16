@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.databinding.FragmentMapBinding
@@ -79,6 +80,12 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
             showMenu(v, R.menu.comunas_popup_menu)
         }
 
+        _viewModel.listOfFields.observe(viewLifecycleOwner, Observer{
+            if(it.isNotEmpty()){
+                Log.i("Launched_listHaveData", it)
+            }
+        })
+
         return binding.root
     }
 
@@ -88,23 +95,20 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         popup.menuInflater.inflate(menuRes, popup.menu)
         popup.show()
 
-        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
-            _viewModel.gettingListOfFields_FromCloudFirestore(menuItem.title.toString())
-            true
-        }
+        /*popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+        }*/
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        getDeviceLocation()
         checkPermissionsAndGetDeviceLocation()
         setMapStyle(map)
         onFieldSelected()
-        _viewModel.listOfFields.observe(viewLifecycleOwner,{
+        /*_viewModel.listOfFields.observe(viewLifecycleOwner,{
             if(!it.isNullOrEmpty()){
                 markingFields()
             }
-        })
+        })*/
     }
 
     private fun setMapStyle(map: GoogleMap) {
@@ -305,7 +309,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
      *
      * For more info, watch how works the method getFields(). Its used in this fragment  in onCreateView
      */
-    private fun markingFields(){
+/*    private fun markingFields(){
         Log.i("Launched", "markingFields")
         val fields = _viewModel.listOfFields
         Log.i("Launched", "markingFields: ${fields.value}")
@@ -322,7 +326,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
             i++
         }
         _viewModel.onDrawComplete()
-    }
+    }*/
 
     private fun onFieldSelected() {
         map.setOnMarkerClickListener {

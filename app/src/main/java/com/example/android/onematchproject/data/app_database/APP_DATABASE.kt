@@ -13,17 +13,17 @@ import com.example.android.onematchproject.data.daos.FieldDao
  * the app.
  */
 @Database(entities = [FIELD_DBO_ENTITY::class], version = 1, exportSchema = false)
-abstract class DATABASE: RoomDatabase() {
+abstract class LOCAL_DATABASE: RoomDatabase() {
     abstract val fieldDao: FieldDao
 }
 
-private lateinit var INSTANCE: DATABASE
+private lateinit var INSTANCE: LOCAL_DATABASE
 
-fun getDatabase(context: Context): DATABASE {
-    synchronized(DATABASE::class.java) {
+fun getDatabase(context: Context): LOCAL_DATABASE {
+    synchronized(LOCAL_DATABASE::class.java) {
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room.databaseBuilder(context.applicationContext,
-                DATABASE::class.java,
+                LOCAL_DATABASE::class.java,
                 "database").build()
         }
     }

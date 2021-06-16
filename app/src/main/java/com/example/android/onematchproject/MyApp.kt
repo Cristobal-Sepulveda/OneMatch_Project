@@ -5,6 +5,8 @@ import android.app.NotificationManager
 import androidx.core.content.ContextCompat
 import com.example.android.onematchproject.data.AppDataSource
 import com.example.android.onematchproject.data.AppRepository
+import com.example.android.onematchproject.data.app_database.LOCAL_DATABASE
+import com.example.android.onematchproject.data.app_database.getDatabase
 import com.example.android.onematchproject.ui.map.MapViewModel
 import com.example.android.onematchproject.ui.profile.ProfileViewModel
 import com.example.android.onematchproject.ui.singleField.SingleFieldViewModel
@@ -40,8 +42,13 @@ class MyApp : Application() {
                     get() as AppDataSource
                 )
             }
-            single{ AppRepository() as AppDataSource}
 
+            //LOCAL_DATABASE, here im creating the local database in the first start and
+            // after that, the db instance persist on the User phone, even if he close the app
+            single{getDatabase(this@MyApp).fieldDao}
+
+            //REPOSITORY
+            single{ AppRepository(get(), get()) as AppDataSource}
         }
 
         startKoin {

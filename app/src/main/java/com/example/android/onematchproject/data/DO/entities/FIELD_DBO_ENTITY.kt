@@ -17,8 +17,9 @@ import java.util.*
 
 @Entity(tableName= "DB_FIELDS")
 data class FIELD_DBO_ENTITY(
-    @PrimaryKey val uid: String = UUID.randomUUID().toString(),
     val name: String,
     val address: String,
-    val location: GeoPoint
+    val latitude: Double,
+    val longitude: Double,
+    @PrimaryKey val uid: String = UUID.randomUUID().toString(),
     )

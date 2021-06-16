@@ -22,17 +22,17 @@ interface FieldDao {
      * @return the field object with the field_id
      */
     @Query("select * from DB_FIELDS where uid = :field_id")
-    suspend fun getField(field_id: String): FIELD_DBO_ENTITY
+    fun getField(field_id: String): FIELD_DBO_ENTITY
 
     /**
      * @return all fields.
      */
     @Query("select * from DB_FIELDS")
-    suspend fun getFields(): List<FIELD_DBO_ENTITY>
+    fun getFields(): List<FIELD_DBO_ENTITY>
 
     /**
      * Delete all fields.
      */
     @Query("delete from DB_FIELDS")
-    suspend fun deleteFields()
+    fun deleteFields()
 }

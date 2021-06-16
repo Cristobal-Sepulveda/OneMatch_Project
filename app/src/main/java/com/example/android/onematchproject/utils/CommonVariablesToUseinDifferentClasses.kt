@@ -13,5 +13,4 @@ object CommonVariablesToUseinDifferentClasses {
         BASIC,
         GOOGLE
     }
-    lateinit  var fieldData: Task<QuerySnapshot>
 }

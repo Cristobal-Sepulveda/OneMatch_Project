@@ -111,6 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textField">
 
             <LinearLayout
+                android:id="@+id/layout_cardView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_border"
@@ -118,6 +119,7 @@
                 android:padding="@dimen/space_big">
 
                 <TextView
+                    android:id="@+id/tituloConTextoJugadores_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/jugadores"
@@ -125,11 +127,13 @@
                     android:textSize="@dimen/text_big" />
 
                 <View
+                    android:id="@+id/separador1"
                     android:layout_width="fill_parent"
                     android:layout_height="2dp"
                     android:background="@drawable/separator" />
 
                 <TextView
+                    android:id="@+id/tituloConTextoEquipo1_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -137,6 +141,7 @@
                     android:textColor="@color/black" />
 
                 <View
+                    android:id="@+id/separador2"
                     android:layout_width="fill_parent"
                     android:layout_height="2dp"
                     android:background="@drawable/separator" />
@@ -182,11 +187,13 @@
                     tools:text="@string/jugadores" />
 
                 <View
+                    android:id="@+id/separador3"
                     android:layout_width="fill_parent"
                     android:layout_height="3dp"
                     android:background="@drawable/separator" />
 
                 <TextView
+                    android:id="@+id/tituloConTextoEquipo2_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -194,6 +201,7 @@
                     android:textColor="@color/black" />
 
                 <View
+                    android:id="@+id/separador4"
                     android:layout_width="fill_parent"
                     android:layout_height="3dp"
                     android:background="@drawable/separator" />

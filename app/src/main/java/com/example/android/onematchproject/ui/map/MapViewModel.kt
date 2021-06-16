@@ -7,30 +7,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.android.onematchproject.base.BaseViewModel
 import com.example.android.onematchproject.data.AppDataSource
+import com.example.android.onematchproject.data.network.CloudFirestoreService
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
-class MapViewModel( val app: Application, val dataSource: AppDataSource) : BaseViewModel(app) {
+class MapViewModel(val app: Application, val dataSource: AppDataSource) : BaseViewModel(app) {
 
     private val _listHaveData = MutableLiveData(false)
     val listHaveData: LiveData<Boolean>
         get() = _listHaveData
 
-    private val _listOfFields = MutableLiveData<ArrayList<Any>>()
-    val listOfFields: LiveData<ArrayList<Any>>
+    private val _listOfFields = MutableLiveData<String>()
+    val listOfFields: LiveData<String>
         get() = _listOfFields
-
-    fun gettingListOfFields_FromCloudFirestore(comuna: String) {
-        _listOfFields.value?.clear()
-        viewModelScope.launch {
-            Log.i("Launched", "gettingListOfFields_FromCloudFirestore")
-            val newListValue = dataSource.getFieldsOnComuna_from_CloudFirestore(comuna)
-            _listOfFields.value = newListValue
-        }
-    }
 
     fun onDrawComplete(){
         _listHaveData.value = false
+    }
+    init{
+        viewModelScope.launch{
+            _listOfFields.value= CloudFirestoreService.getFields_fromCloudFirestore("Maipu")
+        }
     }
 }
