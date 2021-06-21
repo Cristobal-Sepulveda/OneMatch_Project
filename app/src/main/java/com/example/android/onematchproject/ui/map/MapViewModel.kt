@@ -72,12 +72,14 @@ class MapViewModel(val app: Application, val dataSource: AppDataSource) : BaseVi
             Log.i("Launched", "requestSuccess")
             var i = 0
             while (i < it.size()) {
+                val singleFieldId = it.documents[i].get("id")
                 val singleFieldInfo = it.documents[i].get("field_info") as ArrayList<*>
                 val fieldDTO = FIELD_DTO(
                     singleFieldInfo[0] as String,
                     singleFieldInfo[1] as String,
                     (singleFieldInfo[2] as GeoPoint).latitude,
-                    (singleFieldInfo[2] as GeoPoint).longitude
+                    (singleFieldInfo[2] as GeoPoint).longitude,
+                    singleFieldId as String
                 )
                 viewModelScope.launch {
                     withContext(Dispatchers.IO) {

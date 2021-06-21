@@ -21,5 +21,5 @@ data class FIELD_DBO(
     val address: String,
     val latitude: Double,
     val longitude: Double,
-    @PrimaryKey val id: String = UUID.randomUUID().toString(),
+    @PrimaryKey val id: String/* = UUID.randomUUID().toString()*/
     )

@@ -9,6 +9,7 @@ data class FIELD_DTO(
     val address: String,
     val latitude: Double,
     val longitude: Double,
+    val id: String
 )
 
 
@@ -17,6 +18,7 @@ fun FIELD_DTO.asDataBaseModel(fieldDTO: FIELD_DTO): FIELD_DBO {
         name = fieldDTO.name,
         address = fieldDTO.address,
         latitude = fieldDTO.latitude,
-        longitude = fieldDTO.longitude
+        longitude = fieldDTO.longitude,
+        id = fieldDTO.id
     )
 }

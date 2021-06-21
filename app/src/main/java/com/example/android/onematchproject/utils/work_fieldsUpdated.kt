@@ -21,12 +21,9 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.android.onematchproject.data.AppDataSource
-import com.example.android.onematchproject.data.app_database.getDatabase
-import com.example.android.onematchproject.ui.map.MapViewModel
-import org.koin.android.ext.android.inject
+import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class RefreshDataWorker(appContext: Context, params: WorkerParameters):
@@ -35,8 +32,9 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters):
     companion object {
         const val WORK_NAME = "RefreshDataWorker"
     }
-
     val dataSource : AppDataSource by inject()
+    val cloudDB = FirebaseFirestore.getInstance()
+
 
     /**
     * A coroutine-friendly method to manage the work that i want to do.
@@ -44,7 +42,6 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters):
     * The doWork() function now returns Result instead of Payload because they have combined Payload into Result.
     * Read more here - https://developer.android.com/jetpack/androidx/releases/work#1.0.0-alpha12*
     */
-
     override suspend fun doWork(): Result {
         return try {
 
