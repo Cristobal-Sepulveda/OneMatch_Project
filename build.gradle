@@ -76,4 +76,6 @@ ext {
     roomVersion = '2.2.6'
 
     truthVersion = '0.44'
+
+    versionWork = "1.0.1"
 }

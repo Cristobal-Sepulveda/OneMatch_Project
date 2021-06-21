@@ -48,7 +48,7 @@ class MyApp : Application() {
             single{getDatabase(this@MyApp).fieldDao}
 
             //REPOSITORY
-            single{ AppRepository(get(), get()) as AppDataSource}
+            single{ AppRepository(get()) as AppDataSource}
         }
 
         startKoin {

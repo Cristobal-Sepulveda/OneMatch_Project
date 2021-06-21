@@ -66,7 +66,7 @@ class MapViewModel(val app: Application, val dataSource: AppDataSource) : BaseVi
     suspend fun gettingFieldsFromCloudFirestore() {
 
         Log.i("Launched", "GettingFieldsFromCloudFirestore")
-        val comuna = cloudDB.collection("MAIPU").get()
+        val comuna = cloudDB.collection("FIELD_S").get()
 
         comuna.addOnSuccessListener {
             Log.i("Launched", "requestSuccess")

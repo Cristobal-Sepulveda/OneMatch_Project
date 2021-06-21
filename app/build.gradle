@@ -142,4 +142,7 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
     implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
     implementation 'com.google.firebase:firebase-firestore:22.1.2'
+
+    //WorkManager Dependency
+    implementation "android.arch.work:work-runtime-ktx:$versionWork"
 }

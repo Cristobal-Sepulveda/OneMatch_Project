@@ -8,7 +8,6 @@ import com.example.android.onematchproject.utils.Result
 import kotlinx.coroutines.*
 
 class AppRepository(private val fieldDao: FieldDao,
-                    private val context: Context,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AppDataSource {
 
     override suspend fun savingFieldToLocalDatabase(field: FIELD_DBO) {
