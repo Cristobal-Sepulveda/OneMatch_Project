@@ -1,0 +1,22 @@
+package com.example.android.onematchproject.data.data_objects.DTO
+
+import androidx.room.Entity
+import com.example.android.onematchproject.data.data_objects.DBO.FIELD_DBO
+
+@Entity
+data class FIELD_DTO(
+    val name: String,
+    val address: String,
+    val latitude: Double,
+    val longitude: Double,
+)
+
+
+fun FIELD_DTO.asDataBaseModel(fieldDTO: FIELD_DTO): FIELD_DBO {
+    return FIELD_DBO(
+        name = fieldDTO.name,
+        address = fieldDTO.address,
+        latitude = fieldDTO.latitude,
+        longitude = fieldDTO.longitude
+    )
+}

@@ -39,6 +39,8 @@ import org.koin.android.ext.android.inject
 
 class MapFragment() : BaseFragment(), OnMapReadyCallback {
 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>some constants and variables >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     //Use Koin to get the view model of the MapViewModel
     override val _viewModel: MapViewModel by inject()
 
@@ -57,6 +59,8 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var lastKnownLocation: Location? = null
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>
+
 
     @ExperimentalStdlibApi
     override fun onCreateView(inflater: LayoutInflater,
@@ -80,13 +84,44 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
             showMenu(v, R.menu.comunas_popup_menu)
         }
 
-        _viewModel.listOfFields.observe(viewLifecycleOwner, Observer{
-            if(it.isNotEmpty()){
-                Log.i("Launched_listHaveData", it)
+        _viewModel.downloadFromCloud.observe(viewLifecycleOwner, Observer{
+            if(it){
+                _viewModel.onDownloadComplete()
+                val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
+                if (Build.VERSION.SDK_INT >= 26) {
+                    ft.setReorderingAllowed(false)
+                }
+                ft.detach(this).attach(this).commit()
             }
         })
 
+        _viewModel.getFields()
+
         return binding.root
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        checkPermissionsAndGetDeviceLocation()
+        setMapStyle(map)
+        onFieldSelected()
+        _viewModel.listHaveData.observe(viewLifecycleOwner, Observer{
+            if(it){
+                markingFields()
+                _viewModel.onDrawComplete()
+            }
+        })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (foregroundAndBackgroundLocationPermissionApproved()) {
+            val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
+            if (Build.VERSION.SDK_INT >= 26) {
+                ft.setReorderingAllowed(false)
+            }
+            ft.detach(this).attach(this).commit()
+        }
     }
 
     @ExperimentalStdlibApi
@@ -97,18 +132,6 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
 
         /*popup.setOnMenuItemClickListener { menuItem: MenuItem ->
         }*/
-    }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-        checkPermissionsAndGetDeviceLocation()
-        setMapStyle(map)
-        onFieldSelected()
-        /*_viewModel.listOfFields.observe(viewLifecycleOwner,{
-            if(!it.isNullOrEmpty()){
-                markingFields()
-            }
-        })*/
     }
 
     private fun setMapStyle(map: GoogleMap) {
@@ -127,17 +150,6 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
             }
         } catch (e: Resources.NotFoundException) {
             Log.e("SelectLocationFragment", "Can't find style. Error: ", e)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (foregroundAndBackgroundLocationPermissionApproved()) {
-            val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
-            if (Build.VERSION.SDK_INT >= 26) {
-                ft.setReorderingAllowed(false)
-            }
-            ft.detach(this).attach(this).commit()
         }
     }
 
@@ -184,55 +196,53 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     private fun getDeviceLocation() {
         try {
             if (locationPermissionGranted) {
-                Log.i("cristobal", "$locationPermissionGranted")
+                Log.i("getDeviceLocation", "$locationPermissionGranted")
                 val locationResult = fusedLocationProviderClient.lastLocation
                 locationResult.addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
-                        println(task.result?.longitude.toString())
-                        if (lastKnownLocation != null) {
-                            //TODO: zoom to the user location after taking his permission
-                            map.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(
-                                        lastKnownLocation!!.latitude,
-                                        lastKnownLocation!!.longitude
-                                    ), DEFAULT_ZOOM.toFloat()))
-                            map.addMarker(MarkerOptions().
-                            position(LatLng(lastKnownLocation!!.latitude,
-                                lastKnownLocation!!.longitude)).
-                            title("Marker in your actual location")
+                        Log.i("getDeviceLocation", task.result?.longitude.toString())
 
+                        if (lastKnownLocation != null) {
+                            //zoom to the user location after taking his permission
+                            Log.i("getDeviceLocation", "moving camera to user location")
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
+                                , DEFAULT_ZOOM.toFloat())
+                            )
+                            map.addMarker(MarkerOptions()
+                                .position(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude))
+                                .title("Marker in your actual location")
                             )
                         }else{
-                            Log.i("cristobal", "qweqweqwe")
-                            //        TODO: zoom to the user location after taking his permission
-                            map.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(defaultLocation.latitude,
-                                        defaultLocation.longitude
-                                    ), DEFAULT_ZOOM.toFloat()))
+                            //zoom to defaultLocation after taking his permission
+                            Log.i("getDeviceLocation", "moving camera to default location")
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                    LatLng(defaultLocation.latitude, defaultLocation.longitude)
+                                    , DEFAULT_ZOOM.toFloat())
+                            )
                             map.addMarker(MarkerOptions().
                             position(defaultLocation).
                             title("Marker in default location"))
                             map.uiSettings?.isMyLocationButtonEnabled = false
                         }
-                    } else {
-                        Log.i("cristobal", "qweqweqwe")
-                        //        TODO: zoom to the user location after taking his permission
-                        map.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(defaultLocation.latitude,
-                                    defaultLocation.longitude
-                                ), DEFAULT_ZOOM.toFloat()))
-                        map.addMarker(MarkerOptions().
-                        position(defaultLocation).
-                        title("Marker in default location"))
+                    }
+                    else {
+                        Log.i("getDeviceLocation", "getting location task wasn't successfully")
+                        // zoom to the default location after taking his permission
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                LatLng(defaultLocation.latitude, defaultLocation.longitude)
+                                , DEFAULT_ZOOM.toFloat())
+                        )
+                        map.addMarker(MarkerOptions()
+                            .position(defaultLocation)
+                            .title("Marker in default location"))
                         map.uiSettings?.isMyLocationButtonEnabled = false
                     }
                 }
             }else{
+                Log.i("getDeviceLocation", "getting location task wasn't successfully")
                 map.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         LatLng(defaultLocation.latitude,
@@ -246,6 +256,25 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
         }
+    }
+
+    @TargetApi(29)
+    fun foregroundAndBackgroundLocationPermissionApproved(): Boolean {
+        val foregroundLocationApproved = (
+                PackageManager.PERMISSION_GRANTED ==
+                        ActivityCompat.checkSelfPermission(requireActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION))
+
+        val backgroundPermissionApproved =
+            if (runningQOrLater) {
+                PackageManager.PERMISSION_GRANTED ==
+                        ActivityCompat.checkSelfPermission(
+                            requireActivity(), Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                        )
+            } else {
+                true
+            }
+        return foregroundLocationApproved && backgroundPermissionApproved
     }
 
     @TargetApi(29)
@@ -266,24 +295,11 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         )
     }
 
-    @TargetApi(29)
-    fun foregroundAndBackgroundLocationPermissionApproved(): Boolean {
-        val foregroundLocationApproved = (
-                PackageManager.PERMISSION_GRANTED ==
-                        ActivityCompat.checkSelfPermission(requireActivity(),
-                            Manifest.permission.ACCESS_FINE_LOCATION))
-        val backgroundPermissionApproved =
-            if (runningQOrLater) {
-                PackageManager.PERMISSION_GRANTED ==
-                        ActivityCompat.checkSelfPermission(
-                            requireActivity(), Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                        )
-            } else {
-                true
-            }
-        return foregroundLocationApproved && backgroundPermissionApproved
-    }
-
+    /**
+     * This method is for get an drawable and draw an icon to put on the GoogleMaps. This is done
+     * in this way because to mark an item on GoogleMaps, the .icon needs a BitmapDescriptor? &
+     * the drawable is an Int.
+     */
     private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
         val vectorDrawable = ContextCompat.getDrawable(context, vectorResId)
         vectorDrawable!!.setBounds(
@@ -304,29 +320,28 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
 
     /**
      * This method is used in onMapReady() and is unchain before we get the field's info from the LOCAL_DATABASE.
-     * IF WE DONT HAVE DATA THERE, we GET THE DATA FROM CLOUDFIRESTORE and save it in LOCAL_DATABASE. This reduce the
-     * consults to the cloud database.
+     * IF WE DONT HAVE DATA IN THE DB, we GET THE DATA FROM CLOUDFIRESTORE and save it in LOCAL_DATABASE.
+     * This method reduce the consults that the user does to the cloud database.
      *
-     * For more info, watch how works the method getFields(). Its used in this fragment  in onCreateView
+     * For more info, watch how works the method getFields() and write Launched in LOGCAT.i
      */
-/*    private fun markingFields(){
+    private fun markingFields(){
         Log.i("Launched", "markingFields")
         val fields = _viewModel.listOfFields
-        Log.i("Launched", "markingFields: ${fields.value}")
+        Log.i("Launched", "markingFields: ${fields}")
         var i = 0
-        while(i < fields.value!!.size){
-            val field = fields.value!![i] as ArrayList<*>
-            val fieldGeoPoint = field[2] as GeoPoint
-            val latLng = LatLng(fieldGeoPoint.latitude, fieldGeoPoint.longitude)
+        while(i < fields.size){
+            val field = fields[i]
+            val latLng = LatLng(field.latitude, field.longitude)
             map.addMarker(MarkerOptions()
                 .position(latLng)
-                .title(field[0] as String?)
+                .title(field.name as String?)
                 .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.ic_baseline_sports_soccer))
             )
             i++
         }
         _viewModel.onDrawComplete()
-    }*/
+    }
 
     private fun onFieldSelected() {
         map.setOnMarkerClickListener {

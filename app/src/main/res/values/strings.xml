@@ -37,6 +37,7 @@
     <string name="comuna_maipu">Maipu</string>
     <string name="comuna_estacion_central">Estacion Central</string>
     <string name="comuna_santiago_centro">Santiago Centro</string>
+    <string name="loading">loading_fields</string>
     <string-array name="days">
         <item></item>
         <item></item>
