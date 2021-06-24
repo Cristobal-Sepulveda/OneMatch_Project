@@ -31,4 +31,12 @@ class AppRepository(private val fieldDao: FieldDao,
         }
     }
 
+    override suspend fun deletingSavedFieldsInLocalDatabase() {
+        wrapEspressoIdlingResource {
+            withContext(ioDispatcher) {
+                fieldDao.deleteFields()
+            }
+        }
+    }
+
 }

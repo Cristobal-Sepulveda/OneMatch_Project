@@ -19,6 +19,7 @@ import java.util.*
 data class FIELD_DBO(
     val name: String,
     val address: String,
+    val comuna: String,
     val latitude: Double,
     val longitude: Double,
     @PrimaryKey val id: String/* = UUID.randomUUID().toString()*/

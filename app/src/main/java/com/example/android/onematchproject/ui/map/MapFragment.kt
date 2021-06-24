@@ -49,8 +49,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     private val defaultLocation = LatLng(-33.8523341, 151.2106085)
     private lateinit var map: GoogleMap
     private val DEFAULT_ZOOM = 15
-    private val runningQOrLater = Build.VERSION.SDK_INT >=
-            Build.VERSION_CODES.Q
+    private val runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     private var locationPermissionGranted = false
     private val REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE = 33
     private val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34

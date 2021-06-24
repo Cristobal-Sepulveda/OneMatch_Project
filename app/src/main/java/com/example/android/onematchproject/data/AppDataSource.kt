@@ -9,4 +9,5 @@ interface AppDataSource {
      * */
     suspend fun savingFieldToLocalDatabase(field: FIELD_DBO)
     suspend fun gettingFieldsFromDatabase(): List<FIELD_DBO>
+    suspend fun deletingSavedFieldsInLocalDatabase()
 }
