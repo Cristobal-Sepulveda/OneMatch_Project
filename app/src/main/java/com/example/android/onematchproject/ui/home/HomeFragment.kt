@@ -35,10 +35,19 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         val user = firebaseAuth.currentUser!!.email!!
+        binding.button.visibility =
+            when (user){
+            "sepulveda.cristobal.ignacio@gmail.com" -> View.VISIBLE
+                else -> View.GONE
+        }
 
+        /**
+         * This button is like a script, with this i clean all the calendars and update to be ready
+         * for another day.
+         */
         binding.button.setOnClickListener {
-            val days = getFourteenDaysDatesFromToday()
             if (user == "sepulveda.cristobal.ignacio@gmail.com") {
+                val days = getFourteenDaysDatesFromToday()
                 GlobalScope.launch(Dispatchers.IO) {
                     var i = 0
                     //here is 2 because we only have 2 fields in db

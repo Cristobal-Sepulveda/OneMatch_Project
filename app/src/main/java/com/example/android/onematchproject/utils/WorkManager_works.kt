@@ -18,6 +18,7 @@
 package com.example.android.onematchproject.utils
 
 import android.content.Context
+import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.android.onematchproject.data.AppDataSource
@@ -150,46 +151,32 @@ class updatingCalendar_inAllFields_toNextDay_inCLOUDFIRESTORE(appContext: Contex
                     //per field. This only is doing by my mobile. THIS WILL UPDATE THIS DATA AVAILABLE
                         // FOR ALL USERS 1 TIME PER DAY. its a script.
             if (firebaseAuth.currentUser!!.email!! == "sepulveda.cristobal.ignacio@gmail.com") {
-                var i = 0
                 val days = getFourteenDaysDatesFromToday()
-                val rightNow = Calendar.getInstance()
-                val currentHourIn24Format = rightNow[Calendar.HOUR_OF_DAY]
-                val currentMinuteAtHour = rightNow[Calendar.MINUTE]
-                val currentSecondAtMinute = rightNow[Calendar.SECOND]
-                //here is 2 because we only have 2 fields in db
-                while (i < 2) {
-                    cloudDB.collection("FIELD_S")
-                        .document("$i")
-                        .collection("CALENDARIO")
-                        .get()
-                        .addOnSuccessListener {
+                GlobalScope.launch(Dispatchers.IO) {
+                    var i = 0
+                    //here is 2 because we only have 2 fields in db
+                    while (i < 2) {
+                        val request = cloudDB.collection("FIELD_S")
+                            .document("$i")
+                            .collection("CALENDARIO")
+                            .get()
+                        request.addOnSuccessListener {
                             var count = 0
-                            while (count < (it.size()-1)){
-                                updateCalendarLastDay_fromAField(
-                                    i,
-                                    count,
-                                    days[count],
-                                    currentHourIn24Format,
-                                    currentMinuteAtHour,
-                                    currentSecondAtMinute,
-                                    it.documents[count+1]
-                                )
+                            while (count<13 && i <2) {
+                                updateCalendarLastDay_fromAField(i, count, days[count], it.documents[count + 1])
                                 count++
                             }
-                            updateCalendarLastDay_fromAField(
-                                i,
-                                count,
-                                days[count],
-                                currentHourIn24Format,
-                                currentMinuteAtHour,
-                                currentSecondAtMinute,
-                                it.documents[count]
-                            )
+                            if(i<2){
+                                updateCalendarLastDay_fromAField(i,count,days[count],it.documents[count])
+                                i++
+                            } else{
+                                return@addOnSuccessListener
+                            }
                         }
-                        .addOnFailureListener {
+                        request.addOnFailureListener {
                             Result.retry()
                         }
-                    i++
+                    }
                 }
             }
             Result.success()
@@ -199,100 +186,47 @@ class updatingCalendar_inAllFields_toNextDay_inCLOUDFIRESTORE(appContext: Contex
         }
     }
 
-    fun updateCalendarLastDay_fromAField(i: Int, count: Int, day: String, hour: Int, minute: Int,
-        seconds: Int,
-        hashMap: DocumentSnapshot) {
-        if(count == 13){
-            val listado = hashMapOf(
-                "0" to "",
-                "1" to "",
-                "2" to "",
-                "3" to "",
-                "4" to "",
-                "5" to "",
-                "6" to "",
-                "7" to "",
-                "8" to "",
-                "9" to ""
-            )
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("0", listado)
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("1", listado)
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("2", listado)
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("3", listado)
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("4", listado)
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("id", day)
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("current_hour",
-                    "${hour}:${minute}:${seconds}")
+    fun updateCalendarLastDay_fromAField(i: Int, count: Int, day: String, hashMap: DocumentSnapshot) {
+        val rightNow = Calendar.getInstance()
+        val hour = rightNow[Calendar.HOUR_OF_DAY]
+        val minute = rightNow[Calendar.MINUTE]
+        val seconds = rightNow[Calendar.SECOND]
+        val list = hashMapOf(
+            "0" to "",
+            "1" to "",
+            "2" to "",
+            "3" to "",
+            "4" to "",
+            "5" to "",
+            "6" to "",
+            "7" to "",
+            "8" to "",
+            "9" to ""
+        )
+        Log.i("Launched", "$i $count")
+        val updateRequest = cloudDB.collection("FIELD_S")
+            .document("$i")
+            .collection("CALENDARIO")
+
+        if (count != 13) {
+            updateRequest.document("$count").update("0", hashMap.get("0"))
+            updateRequest.document("$count").update("1", hashMap.get("1"))
+            updateRequest.document("$count").update("2", hashMap.get("2"))
+            updateRequest.document("$count").update("3", hashMap.get("3"))
+            updateRequest.document("$count").update("4", hashMap.get("4"))
+            updateRequest.document("$count")
+                .update("current_hour", "${hour}:${minute}:${seconds}")
+            updateRequest.document("$count").update("id", day)
         }
         else{
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("0", hashMap.get("0"))
-
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("1", hashMap.get("1"))
-
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("2", hashMap.get("2"))
-
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("3", hashMap.get("3"))
-
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("4", hashMap.get("4"))
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("id", day)
-            cloudDB.collection("FIELD_S")
-                .document("$i")
-                .collection("CALENDARIO")
-                .document("$count")
-                .update("current_hour",
-                    "${hour}:${minute}:${seconds}")
+            updateRequest.document("$count").update("0", list)
+            updateRequest.document("$count").update("1", list)
+            updateRequest.document("$count").update("2", list)
+            updateRequest.document("$count").update("3", list)
+            updateRequest.document("$count").update("4", list)
+            updateRequest.document("$count").update("id", day)
+            updateRequest.document("$count").update("current_hour",
+                "${hour}:${minute}:${seconds}")
         }
     }
 
