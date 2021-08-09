@@ -2,7 +2,6 @@ package com.example.android.onematchproject.base
 
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.android.onematchproject.utils.NavigationCommand
 import com.google.android.material.snackbar.Snackbar
@@ -18,7 +17,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        _viewModel.showErrorMessage.observe(this, Observer{
+        _viewModel.showErrorMessage.observe(this, {
             Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
         })
         _viewModel.showToast.observe(this, {

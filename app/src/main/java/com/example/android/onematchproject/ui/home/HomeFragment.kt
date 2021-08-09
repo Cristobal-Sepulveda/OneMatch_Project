@@ -1,5 +1,8 @@
 package com.example.android.onematchproject.ui.home
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -7,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -20,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -34,18 +39,18 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+
         val user = firebaseAuth.currentUser!!.email!!
-        binding.button.visibility =
-            when (user){
+        binding.cloudRefreshCalendarsButton.visibility = when (user){
             "sepulveda.cristobal.ignacio@gmail.com" -> View.VISIBLE
-                else -> View.GONE
+            else -> View.GONE
         }
 
         /**
          * This button is like a script, with this i clean all the calendars and update to be ready
          * for another day.
          */
-        binding.button.setOnClickListener {
+        binding.cloudRefreshCalendarsButton.setOnClickListener {
             if (user == "sepulveda.cristobal.ignacio@gmail.com") {
                 val days = getFourteenDaysDatesFromToday()
                 GlobalScope.launch(Dispatchers.IO) {
@@ -83,8 +88,39 @@ class HomeFragment : Fragment() {
             }
         }
 
+        /*binding.googlePayButton.setOnClickListener {
+            val uri: Uri? = Uri.Builder()
+                .scheme("upi")
+                .authority("pay")
+                .appendQueryParameter("pa", ) //payee virtual address
+                .appendQueryParameter("pn", ) //payee name
+                .appendQueryParameter("mc", ) //business retailer category code
+                .appendQueryParameter("tr", ) //unique transaction id
+                .appendQueryParameter("tn", ) //message
+                .appendQueryParameter("am", ) //amount
+                .appendQueryParameter("cu", ) //currently default currency code
+                .appendQueryParameter("url", ) //transaction reference url
+                .build()
+
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = uri
+            intent.setPackage(GOOGLE_PAY_PACKAGE_NAME)
+            startActivityForResult(intent, GOOGLE_PAY_REQUEST_CODE)
+
+        }*/
+
         return binding.root
     }
+
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==GOOGLE_PAY_REQUEST_CODE){
+            if (data != null) {
+                data.getStringExtra("Status")?.let { Log.i("googlePay", it) }
+                Toast.makeText(requireContext(), data.getStringExtra("Status"), Toast.LENGTH_LONG).show()
+            }
+        }
+    }*/
 
     fun updateCalendarLastDay_fromAField(i: Int, count: Int, day: String, hashMap: DocumentSnapshot) {
         val rightNow = Calendar.getInstance()
@@ -129,7 +165,6 @@ class HomeFragment : Fragment() {
                 "${hour}:${minute}:${seconds}")
         }
     }
-
     fun getFourteenDaysDatesFromToday(): ArrayList<String> {
         val formattedDateList = ArrayList<String>()
         val calendar = Calendar.getInstance()
