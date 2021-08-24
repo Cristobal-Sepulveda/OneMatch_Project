@@ -3,9 +3,12 @@ package com.example.android.onematchproject.data
 import android.content.Context
 import com.example.android.onematchproject.data.data_objects.DBO.FIELD_DBO
 import com.example.android.onematchproject.data.daos.FieldDao
+import com.example.android.onematchproject.data.network.TransBankApi
+import com.example.android.onematchproject.data.network.TransBankApiService
 import com.example.android.onematchproject.utils.EspressoIdlingResource.wrapEspressoIdlingResource
 import com.example.android.onematchproject.utils.Result
 import kotlinx.coroutines.*
+import retrofit2.Call
 
 class AppRepository(private val fieldDao: FieldDao,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AppDataSource {
@@ -35,6 +38,16 @@ class AppRepository(private val fieldDao: FieldDao,
         wrapEspressoIdlingResource {
             withContext(ioDispatcher) {
                 fieldDao.deleteFields()
+            }
+        }
+    }
+
+    override suspend fun transBankApi(): Call<String> {
+        wrapEspressoIdlingResource {
+            withContext(ioDispatcher) {
+                val transbankApiResponse = TransBankApi.RETROFIT_SERVICE_TRANSBANK_API.getResponse(
+
+                )
             }
         }
     }

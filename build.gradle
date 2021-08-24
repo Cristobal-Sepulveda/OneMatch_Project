@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
         classpath 'com.google.gms:google-services:4.3.5'
@@ -53,6 +53,7 @@ ext {
     constraintVersion = '2.1.0-beta01'
     coroutinesVersion = '1.4.3'
     constraintLayout =  '2.1.0-beta01'
+
     dexMakerVersion = '2.12.1'
 
     espressoVersion = '3.3.0'
@@ -73,8 +74,12 @@ ext {
     recyclerViewVersion = '1.1.0'
     robolectricVersion = '4.5-alpha-3'
     roomVersion = '2.2.6'
+    version_retrofit = "2.9.0"
+    version_retrofit_coroutines_adapter = "0.9.2"
+
 
     truthVersion = '0.44'
+    transbankVersion = '1.9.3'
 
     versionWork = "1.0.1"
 }

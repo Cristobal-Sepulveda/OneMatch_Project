@@ -1,21 +1,15 @@
 package com.example.android.onematchproject.ui.home
 
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import androidx.work.ListenableWorker
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.databinding.FragmentHomeBinding
 import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.firebaseAuth
@@ -24,7 +18,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -45,6 +38,7 @@ class HomeFragment : Fragment() {
             "sepulveda.cristobal.ignacio@gmail.com" -> View.VISIBLE
             else -> View.GONE
         }
+
 
         /**
          * This button is like a script, with this i clean all the calendars and update to be ready
@@ -165,6 +159,7 @@ class HomeFragment : Fragment() {
                 "${hour}:${minute}:${seconds}")
         }
     }
+
     fun getFourteenDaysDatesFromToday(): ArrayList<String> {
         val formattedDateList = ArrayList<String>()
         val calendar = Calendar.getInstance()
