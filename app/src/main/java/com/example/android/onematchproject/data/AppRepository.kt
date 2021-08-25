@@ -41,15 +41,4 @@ class AppRepository(private val fieldDao: FieldDao,
             }
         }
     }
-
-    override suspend fun transBankApi(): Call<String> {
-        wrapEspressoIdlingResource {
-            withContext(ioDispatcher) {
-                val transbankApiResponse = TransBankApi.RETROFIT_SERVICE_TRANSBANK_API.getResponse(
-
-                )
-            }
-        }
-    }
-
 }
