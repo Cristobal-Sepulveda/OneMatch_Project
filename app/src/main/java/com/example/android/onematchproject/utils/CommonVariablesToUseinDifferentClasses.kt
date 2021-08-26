@@ -349,7 +349,322 @@ object CommonVariablesToUseinDifferentClasses {
             -70.78771392374193
         ),
 
+        /** 41*/
+        FIELD_DBO(
+            "Multicancha Cronos",
+            "4 Poniente con Cronos",
+            "Maipú",
+            -33.517449264175156,
+            -70.79097503229931
+        ),
 
+        /** 42*/
+        FIELD_DBO(
+            "Multicancha La Galaxia",
+            "La Galaxia con Senadora María de la Cruz",
+            "Maipú",
+            -33.51057621097001,
+            -70.79479178499462
+        ),
+
+        /** 43*/
+        FIELD_DBO(
+            "Multicancha Futaleufu1",
+            "Futaleufu 1982",
+            "Maipú",
+            -33.51233154412302,
+            -70.7862026707283
+        ),
+
+        /** 44*/
+        FIELD_DBO(
+            "Multicancha Futaleufu2",
+            "Futaleufu 2012",
+            "Maipú",
+            -33.51196364421673,
+            -70.78611799523395
+        ),
+
+        /** 45*/
+        FIELD_DBO(
+            "Multicancha Quinta Vergara",
+            "Quinta Vergara con Jose Manuel Borgoño",
+            "Maipú",
+            -33.509237414492596,
+            -70.7879526744267
+        ),
+
+        /** 46*/
+        FIELD_DBO(
+            "Multicancha Riñihue",
+            "Riñihue 2248",
+            "Maipú",
+            -33.50963102149335, -70.78802050756907
+        ),
+
+        /** 47*/
+        FIELD_DBO(
+            "Multicancha Agua Santa1",
+            "Galaxia con Agua Santa",
+            "Maipú",
+            -33.51382276523398, -70.79425890985318
+        ),
+
+        /** 48*/
+        FIELD_DBO(
+            "Multicancha Agua Santa2",
+            "Galaxia con Agua Santa",
+            "Maipú",
+            -33.51397799251439, -70.7942172645024
+        ),
+
+        /** 49*/
+        FIELD_DBO(
+            "Multicancha Jaime Galte",
+            "Jaime Galte con El Conquistador",
+            "Maipú",
+            -33.511720583012774, -70.79854132338704
+        ),
+
+        /** 50*/
+        FIELD_DBO(
+            "Multicancha Jose Manuel Borgoño",
+            "Jose Manuel Borgoño 2787",
+            "Maipú",
+            -33.50860107300483, -70.79185061741721
+        ),
+
+        /** 51*/
+        FIELD_DBO(
+            "Multicancha Andromeda",
+            "Andromeda 2898",
+            "Maipú",
+            -33.51438703826444, -70.79523445833048
+        ),
+
+        /** 52*/
+        FIELD_DBO(
+            "Multicancha San José",
+            "San José 316",
+            "Maipú",
+            -33.51504147687769, -70.76085501682041
+        ),
+
+        /** 53*/
+        FIELD_DBO(
+            "Multicancha Manquehue",
+            "Manquehue 2100",
+            "Maipú",
+            -33.506777668849246, -70.7867727732632
+        ),
+
+        /** 54*/
+        FIELD_DBO(
+            "Multicancha San José",
+            "San José 3070",
+            "Maipú",
+            -33.518010225510444, -70.79752783755869
+        ),
+
+        /** 55*/
+        FIELD_DBO(
+            "Multicancha Valle de los Reyes",
+            "Valle de los Reyes, Lo Vásquez",
+            "Maipú",
+            -33.515790600258995, -70.79877973823245
+        ),
+
+        /** 56*/
+        FIELD_DBO(
+            "Multicancha Campos de Deporte",
+            "Los Arces con Campos de Deporte",
+            "Maipú",
+            -33.51109979218838, -70.82549301707077
+        ),
+
+        /** 57*/
+        FIELD_DBO(
+            "Multicancha Pocuro",
+            "Pocuro 5757",
+            "Maipú",
+            -33.497296463920236, -70.81472414495616
+        ),
+
+        /** 58*/
+        FIELD_DBO(
+            "Multicancha El Hoyo",
+            "Presidente Kennedy con Nva Municipal",
+            "Maipú",
+            -33.49917481348162, -70.74818543023662
+        ),
+
+        /** 59*/
+        FIELD_DBO(
+            "Multicancha El Alto",
+            "El Alto 1176",
+            "Maipú",
+            -33.509103705951375, -70.7447337547853
+        ),
+
+        /** 60*/
+        FIELD_DBO(
+            "Multicancha Séptimo de Linea",
+            "Séptimo de Linea con Portada del Este",
+            "Maipú",
+            -33.50619097698634, -70.74314184984854
+        ),
+
+        /** 61*/
+        FIELD_DBO(
+            "Multicancha Gaston Palma",
+            "Uno sur Con Gastón Palma",
+            "Maipú",
+            -33.50759854570704, -70.74183755577795
+        ),
+
+        /** 62*/
+        FIELD_DBO(
+            "Multicancha Luis Uribe",
+            "Luis Uribe 909",
+            "Maipú",
+            -33.503550253449006, -70.74699933127522
+        ),
+
+        /** 63*/
+        FIELD_DBO(
+            "Multicancha Gastón Palma",
+            "Pamela con Gastón Palma",
+            "Maipú",
+            -33.50465636414843, -70.74101046223491
+        ),
+
+        /** 64*/
+        FIELD_DBO(
+            "Multicancha Jorge Montt",
+            "Jorge Montt con Luis Barros Borgoño",
+            "Maipú",
+            -33.503871504107636, -70.78305175039532
+        ),
+
+        /** 65*/
+        /** ES LA MISMA QUE LA 64**/
+
+        /** 66*/
+        /** NO EXISTE*/
+
+        /** 67*/
+        FIELD_DBO(
+            "Multicancha Teniente Bello",
+            "Pasaje Armando Cortinez con Teniente Bello",
+            "Maipú",
+            -33.502151934815785, -70.78253756827527
+        ),
+
+        /** 68*/
+        FIELD_DBO(
+            "Multicancha Los Cometas",
+            "Campanario con Los Cometas",
+            "Maipú",
+            -33.520642147726505, -70.79340015175117
+        ),
+
+        /** 69*/
+        FIELD_DBO(
+            "Multicancha Los Astronomos",
+            "Los Astronomos 2987",
+            "Maipú",
+            -33.523761335066915, -70.7961453601286
+        ),
+
+        /** 70*/
+        FIELD_DBO(
+            "Pastor Gillermo Castillo 1379",
+            "Los Astronomos 2987",
+            "Maipú",
+            -33.523761335066915, -70.7961453601286
+        ),
+
+        /** 71*/
+        FIELD_DBO(
+            "Multicancha Victor Jara",
+            "Victor Jara con German Gárces",
+            "Maipú",
+            -33.525909816273085, -70.78450682261048
+        ),
+
+        /** 72*/
+        FIELD_DBO(
+            "Multicancha Valle de los Reyes",
+            "Valle de los Reyes con Los Astrónomos",
+            "Maipú",
+            -33.523363345456595, -70.79835657311013
+        ),
+
+        /** 73*/
+        FIELD_DBO(
+            "Multicancha La Dormida",
+            "Hermanos Carrera con Rengifo",
+            "Maipú",
+            -33.520252457602794, -70.79485398333526
+        ),
+
+        /** 74*/
+        FIELD_DBO(
+            "Multicancha Rio Clarillo",
+            "Diego Barros Ortiz con Rio Clarillo",
+            "Maipú",
+            -33.52307865002648, -70.79332360848507
+        ),
+
+        /** 75*/
+        FIELD_DBO(
+            "Multicancha Galio",
+            "Galio con Disprosio",
+            "Maipú",
+            -33.52098483394128, -70.7836775900462
+        ),
+
+        /** 76*/
+        FIELD_DBO(
+            "Multicancha Ingeniero Fernando Smits Schleyer ",
+            "Ingeniero Fernando Smits Schleyer con Job",
+            "Maipú",
+            -33.527700028404695, -70.79572733136311
+        ),
+
+        /** 77*/
+        FIELD_DBO(
+            "Multicancha La Fortuna",
+            "Los Florines con Aton",
+            "Maipú",
+            -33.523355073115624, -70.76620242896863
+        ),
+
+        /** 78*/
+        FIELD_DBO(
+            "Multicancha Andrés Amenábar Vergara",
+            "Andrés Amenábar con Hermogenes Perez de Arce",
+            "Maipú",
+            -33.5318109705426, -70.76940674664746
+        ),
+
+        /** 79*/
+        FIELD_DBO(
+            "Multicancha Segundo Puente",
+            "Cayupil 468",
+            "Maipú",
+            -33.533949005357194, -70.77819596700932
+        ),
+
+        /** 80*/
+        FIELD_DBO(
+            "Multicancha Primer Puente",
+            "Cayupil 469",
+            "Maipú",
+            -33.53355103587574, -70.7786117093691
+        ),
+
+        /** 81*/
         FIELD_DBO(
             "Multicancha Hermanos Carrera",
             "Hermanos Carrera con Rengifo",
@@ -357,6 +672,8 @@ object CommonVariablesToUseinDifferentClasses {
             -33.51867788290727,
             -70.76054753427009
         ),
+
+        /** 82*/
         FIELD_DBO(
             "Multicancha Hermanos Carrera",
             "Hermanos Carrera con Rengifo",
@@ -364,6 +681,8 @@ object CommonVariablesToUseinDifferentClasses {
             -33.51867788290727,
             -70.76054753427009
         ),
+
+        /** 83*/
         FIELD_DBO(
             "Multicancha Hermanos Carrera",
             "Hermanos Carrera con Rengifo",
@@ -371,6 +690,8 @@ object CommonVariablesToUseinDifferentClasses {
             -33.51867788290727,
             -70.76054753427009
         ),
+
+        /** 84*/
         FIELD_DBO(
             "Multicancha Hermanos Carrera",
             "Hermanos Carrera con Rengifo",
@@ -378,279 +699,8 @@ object CommonVariablesToUseinDifferentClasses {
             -33.51867788290727,
             -70.76054753427009
         ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
+
+        /** 85*/
         FIELD_DBO(
             "Multicancha Hermanos Carrera",
             "Hermanos Carrera con Rengifo",
