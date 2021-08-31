@@ -15,18 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/selectAComuna_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/select_a_comuna"
-            android:textColor="@color/white"
-            android:textSize="26sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
         <!--TODO: Add the map fragment for the user to select the location-->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/map"
@@ -35,22 +23,7 @@
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/selectAComuna_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-        <!-- cloudDownloadComplete is in BindingAdapter.
-             It sets the visibility-->
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_connection_error"
-            app:cloudDownloadComplete="@{viewModel.status}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/selectAComuna_button"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
@@ -63,10 +36,8 @@
             app:fieldsStatus="@{viewModel.status}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/selectAComuna_button"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
         />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

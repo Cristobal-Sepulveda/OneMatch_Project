@@ -84,23 +84,6 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        binding.selectAComunaButton.setOnClickListener{v: View ->
-            showMenu(v, R.menu.comunas_popup_menu)
-        }
-
-        _viewModel.downloadFromCloud.observe(viewLifecycleOwner, Observer{
-            if(it){
-                _viewModel.onDownloadComplete()
-                val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
-                if (Build.VERSION.SDK_INT >= 26) {
-                    ft.setReorderingAllowed(false)
-                }
-                ft.detach(this).attach(this).commit()
-            }
-        })
-
-        _viewModel.getFields()
-
         return binding.root
     }
 
@@ -268,14 +251,12 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
                 PackageManager.PERMISSION_GRANTED ==
                         ActivityCompat.checkSelfPermission(requireActivity(),
                             Manifest.permission.ACCESS_FINE_LOCATION))
-
         val backgroundPermissionApproved =
             if (runningQOrLater) {
-                PackageManager.PERMISSION_GRANTED ==
-                        ActivityCompat.checkSelfPermission(
+                PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(
                             requireActivity(), Manifest.permission.ACCESS_BACKGROUND_LOCATION
                         )
-            } else {
+            }else{
                 true
             }
         return foregroundLocationApproved && backgroundPermissionApproved
@@ -332,8 +313,8 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     private fun markingFields(){
         Log.i("Launched", "markingFields")
         val fields = _viewModel.listOfFields
-        Log.i("Launched", "markingFields: ${fields}")
-        var i = 0
+        Log.i("Launched", "markingFields: $fields")
+        var i = 90
         while(i < fields.size){
             val field = fields[i]
             val latLng = LatLng(field.latitude, field.longitude)
