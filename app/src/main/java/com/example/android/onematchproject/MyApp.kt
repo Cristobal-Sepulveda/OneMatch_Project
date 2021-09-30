@@ -8,6 +8,7 @@ import androidx.work.*
 import com.example.android.onematchproject.data.AppDataSource
 import com.example.android.onematchproject.data.AppRepository
 import com.example.android.onematchproject.data.app_database.getDatabase
+import com.example.android.onematchproject.ui.home.HomeViewModel
 import com.example.android.onematchproject.ui.map.MapViewModel
 import com.example.android.onematchproject.ui.profile.ProfileViewModel
 import com.example.android.onematchproject.ui.singleField.SingleFieldViewModel
@@ -51,6 +52,13 @@ class MyApp : Application() {
                     get(),
                     get() as AppDataSource
                 )
+            }
+            single{
+                HomeViewModel(
+                    get(),
+                    get() as AppDataSource
+                )
+
             }
 
             //LOCAL_DATABASE, here im creating the local database in the first start and

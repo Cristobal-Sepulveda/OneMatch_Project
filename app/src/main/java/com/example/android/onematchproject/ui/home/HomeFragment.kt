@@ -11,165 +11,33 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.onematchproject.R
+import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.databinding.FragmentHomeBinding
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.firebaseAuth
+import com.example.android.onematchproject.ui.map.MapViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
-    private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
+    override val _viewModel: MapViewModel by inject()
     val cloudDB = FirebaseFirestore.getInstance()
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-
-        val user = firebaseAuth.currentUser!!.email!!
-        binding.cloudRefreshCalendarsButton.visibility = when (user){
-            "sepulveda.cristobal.ignacio@gmail.com" -> View.VISIBLE
-            else -> View.GONE
-        }
-
-
-        /**
-         * This button is like a script, with this i clean all the calendars and update to be ready
-         * for another day.
-         */
-        binding.cloudRefreshCalendarsButton.setOnClickListener {
-            if (user == "sepulveda.cristobal.ignacio@gmail.com") {
-                val days = getFourteenDaysDatesFromToday()
-                GlobalScope.launch(Dispatchers.IO) {
-                    var i = 0
-                    //here is 2 because we only have 2 fields in db
-                    while (i < 2) {
-                        val request = cloudDB.collection("FIELD_S")
-                            .document("$i")
-                            .collection("CALENDARIO")
-                            .get()
-                        request.addOnSuccessListener {
-                            var count = 0
-                            while (count<13 && i <2) {
-                                updateCalendarLastDay_fromAField(i, count, days[count], it.documents[count + 1])
-                                count++
-                            }
-                            if(i<2){
-                                updateCalendarLastDay_fromAField(i,count,days[count],it.documents[count])
-                                i++
-                            } else{
-                                return@addOnSuccessListener
-                            }
-                        }
-                        request.addOnFailureListener {
-                            return@addOnFailureListener
-                        }
-                    }
-                }
-                Log.i("Launched", "restarting fragment")
-                val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
-                if (Build.VERSION.SDK_INT >= 26) {
-                    ft.setReorderingAllowed(false)
-                }
-                ft.detach(this).attach(this).commit()
-            }
-        }
-
-        /*binding.googlePayButton.setOnClickListener {
-            val uri: Uri? = Uri.Builder()
-                .scheme("upi")
-                .authority("pay")
-                .appendQueryParameter("pa", ) //payee virtual address
-                .appendQueryParameter("pn", ) //payee name
-                .appendQueryParameter("mc", ) //business retailer category code
-                .appendQueryParameter("tr", ) //unique transaction id
-                .appendQueryParameter("tn", ) //message
-                .appendQueryParameter("am", ) //amount
-                .appendQueryParameter("cu", ) //currently default currency code
-                .appendQueryParameter("url", ) //transaction reference url
-                .build()
-
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = uri
-            intent.setPackage(GOOGLE_PAY_PACKAGE_NAME)
-            startActivityForResult(intent, GOOGLE_PAY_REQUEST_CODE)
-
-        }*/
+        val firebaseAuth = FirebaseAuth.getInstance()
 
         return binding.root
     }
 
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==GOOGLE_PAY_REQUEST_CODE){
-            if (data != null) {
-                data.getStringExtra("Status")?.let { Log.i("googlePay", it) }
-                Toast.makeText(requireContext(), data.getStringExtra("Status"), Toast.LENGTH_LONG).show()
-            }
-        }
-    }*/
-
-    fun updateCalendarLastDay_fromAField(i: Int, count: Int, day: String, hashMap: DocumentSnapshot) {
-        val rightNow = Calendar.getInstance()
-        val hour = rightNow[Calendar.HOUR_OF_DAY]
-        val minute = rightNow[Calendar.MINUTE]
-        val seconds = rightNow[Calendar.SECOND]
-        val list = hashMapOf(
-            "0" to "",
-            "1" to "",
-            "2" to "",
-            "3" to "",
-            "4" to "",
-            "5" to "",
-            "6" to "",
-            "7" to "",
-            "8" to "",
-            "9" to ""
-        )
-        Log.i("Launched", "$i $count")
-        val updateRequest = cloudDB.collection("FIELD_S")
-            .document("$i")
-            .collection("CALENDARIO")
-
-        if (count != 13) {
-            updateRequest.document("$count").update("0", hashMap.get("0"))
-            updateRequest.document("$count").update("1", hashMap.get("1"))
-            updateRequest.document("$count").update("2", hashMap.get("2"))
-            updateRequest.document("$count").update("3", hashMap.get("3"))
-            updateRequest.document("$count").update("4", hashMap.get("4"))
-            updateRequest.document("$count")
-                .update("current_hour", "${hour}:${minute}:${seconds}")
-            updateRequest.document("$count").update("id", day)
-        }
-        else{
-            updateRequest.document("$count").update("0", list)
-            updateRequest.document("$count").update("1", list)
-            updateRequest.document("$count").update("2", list)
-            updateRequest.document("$count").update("3", list)
-            updateRequest.document("$count").update("4", list)
-            updateRequest.document("$count").update("id", day)
-            updateRequest.document("$count").update("current_hour",
-                "${hour}:${minute}:${seconds}")
-        }
-    }
-
-    fun getFourteenDaysDatesFromToday(): ArrayList<String> {
-        val formattedDateList = ArrayList<String>()
-        val calendar = Calendar.getInstance()
-        for (i in 0..13) {
-            val currentTime = calendar.time
-            /*val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())*/
-            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-            formattedDateList.add(dateFormat.format(currentTime))
-            calendar.add(Calendar.DAY_OF_YEAR, 1)
-        }
-        return formattedDateList
-    }
 }

@@ -44,6 +44,8 @@ class SingleFieldFragment: BaseFragment() {
 
     override fun onResume() {
         super.onResume()
+
+        /** Method that sets the date as the one the user select*/
         binding.autoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
             val selectedDate = parent.getItemAtPosition(position) as String
             Log.i("ITEM CLICKED", "$position")
@@ -113,7 +115,6 @@ class SingleFieldFragment: BaseFragment() {
     fun displayingDatainTheLayoutXML() {
         if(!_viewModel.listOfPlayers.value.isNullOrEmpty()) {
             Log.i("launched", "DisplayingDataInTheLayoutXML")
-
             binding.player0.text = "1) ${_viewModel.listOfPlayers.value!![0].name}"
             binding.player1.text = "2) ${_viewModel.listOfPlayers.value!![1].name}"
             binding.player2.text = "3) ${_viewModel.listOfPlayers.value!![2].name}"

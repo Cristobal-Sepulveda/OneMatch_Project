@@ -52,7 +52,7 @@ ext {
     cardVersion = '1.0.0'
     constraintVersion = '2.1.0-beta01'
     coroutinesVersion = '1.4.3'
-    constraintLayout =  '2.1.0-beta01'
+    constraintLayout =  '2.1.0'
 
     dexMakerVersion = '2.12.1'
 

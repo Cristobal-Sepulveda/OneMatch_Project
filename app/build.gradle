@@ -56,12 +56,10 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.legacy:legacy-support-v4:$androidXLegacySupport"
     implementation "androidx.annotation:annotation:$androidXAnnotations"
-
     implementation "androidx.cardview:cardview:$cardVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
-
     implementation 'com.google.code.gson:gson:2.8.6'
 
     //Circle Profile Picture View

@@ -27,6 +27,7 @@ import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.data.data_objects.DBO.FIELD_DBO
 import com.example.android.onematchproject.databinding.FragmentMapBinding
+import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.canchas_maipu
 import com.example.android.onematchproject.utils.NavigationCommand
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -92,12 +93,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
         checkPermissionsAndGetDeviceLocation()
         setMapStyle(map)
         onFieldSelected()
-        _viewModel.listHaveData.observe(viewLifecycleOwner, Observer{
-            if(it){
-                markingFields()
-                _viewModel.onDrawComplete()
-            }
-        })
+        markingFields()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -312,9 +308,9 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
      */
     private fun markingFields(){
         Log.i("Launched", "markingFields")
-        val fields = _viewModel.listOfFields
+        val fields = canchas_maipu
         Log.i("Launched", "markingFields: $fields")
-        var i = 90
+        var i = 0
         while(i < fields.size){
             val field = fields[i]
             val latLng = LatLng(field.latitude, field.longitude)
@@ -325,7 +321,6 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
             )
             i++
         }
-        _viewModel.onDrawComplete()
     }
 
     private fun onFieldSelected() {

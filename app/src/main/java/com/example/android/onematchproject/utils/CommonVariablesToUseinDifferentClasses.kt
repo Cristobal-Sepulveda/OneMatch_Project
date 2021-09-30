@@ -3,11 +3,13 @@ package com.example.android.onematchproject.utils
 import com.example.android.onematchproject.data.data_objects.DBO.FIELD_DBO
 import com.google.firebase.auth.FirebaseAuth
 
+
 object CommonVariablesToUseinDifferentClasses {
-    val firebaseAuth = FirebaseAuth.getInstance()
+
     const val TAG = "AuthenticationActivity"
     const val SIGN_IN_RESULT_CODE = 1001
     const val REQUEST_TURN_DEVICE_LOCATION_ON = 29
+    val firebaseAuth = FirebaseAuth.getInstance()
 
     enum class ProviderType{
         BASIC,
@@ -742,513 +744,544 @@ object CommonVariablesToUseinDifferentClasses {
         ),
 
         /** 91*/
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
+        /** NO EXISTE*/
 
         /** 92*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Escuela Naval 1",
+            "Escuela Naval con Fogonero Urra",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.53942973163962, -70.77726937562036
         ),
 
         /** 93*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Escuela Naval 2",
+            "Escuela Naval con Fogonero Urra",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.53953312821701, -70.77742049142165
         ),
 
         /** 94*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Renato Labra 1",
+            "Ricardo Barahona con Lenka Franulic",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.53040716323843, -70.76301187068309
         ),
 
         /** 95*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Renato Labra 2",
+            "Ricardo Barahona con Lenka Franulic",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.530594976118614, -70.76332032468903
         ),
 
         /** 96*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Hernán Díaz Arrieta",
+            "Hernán Díaz Arrieta con El Tranque",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.54936120139232, -70.79528285873965
         ),
 
         /** 97*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Caleta de Camarones",
+            "Caleta de Camarones con Salar Grande",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.538243986591574, -70.79195738519404
         ),
 
         /** 98*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha La Trilla",
+            "Del Ferrocarril con La Trilla",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.54750718872746, -70.78718517502175
         ),
 
         /** 99*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha San Rene",
+            "San Rene con El Tranque",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.55034534235806, -70.7939265212923
         ),
 
         /** 100*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Hernán Díaz Arrieta",
+            "Hernán Díaz Arrieta 3857",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.54793020300481, -70.79455182564134
         ),
+
+        /** 101*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Valle de los Reyes",
+            "Valle de los Reyes con Catemu",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.5322606909722, -70.79974738264684
         ),
+
+        /** 102*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Lago Carlota",
+            "Lago Carlota con Lago Jeinimeni",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.552919878134894, -70.79834122856987
         ),
+
+        /** 103*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Nemesio Antunez",
+            "Nemesio Antunez 210",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.54950991742884, -70.79319090218834
         ),
+
+        /** 104*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Marta Ossa Ruíz",
+            "Marta Ossa Ruíz 1051",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.466117388582376, -70.75267417078626
         ),
+
+        /** 105*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Ingeniero Roberto LLona",
+            "Ingeniero Roberto Llona 5220",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.47237765513767, -70.75230051733166
         ),
+
+        /** 106*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Miqueas 1",
+            "Miqueas 4443",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.48099205057778, -70.74861012367474
         ),
+
+        /** 107*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Miqueas 2",
+            "Miqueas 4443",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.481099797973016, -70.74846977679879
         ),
+
+        /** 108*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Santa Elena",
+            "Santa Elena con Miqueas",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.47907212337505, -70.74745353378253
         ),
+
+        /** 109*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Las Meninas",
+            "Las Meninas 4706",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.47862181368209, -70.75143774590391
         ),
+
+        /** 110*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Marco Echeñique",
+            "Marco Echeñique 573",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.476681999421366, -70.75299353447241
         ),
+
+        /** 111*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Antonio Varas",
+            "Min Antonio Varas 5524",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.466861988827354, -70.7551508730337
         ),
+
+        /** 112*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Picaflor",
+            "Picaflor 452",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.47154893249687, -70.74667716476934
         ),
+
+        /** 113*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Hermanos valladolid",
+            "valladolid 358",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.47584002099541, -70.73682689066653
         ),
+        /** 114*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Nairobi",
+            "Zaire con Nairobi",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.4792336897686, -70.73658848543832
         ),
+        /** 115*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Isabel Riquelme",
+            "Isabel Riquelme 4536",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.483562539326265, -70.74133541695387
         ),
+        /** 116*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha La Machi",
+            "Batalla de Rancagua con Machi",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.488098226805995, -70.77025472189713
         ),
+        /** 117*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Cordillera de los Andes ",
+            "Santa Biblia 1397",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.48675645256617, -70.7652160137869
         ),
+
+        /** 118*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha La Sinfonia",
+            "La Sinfonia 1190",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.489616483752236, -70.76522570939873
         ),
+
+        /** 119*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Las Petunias",
+            "Las Petunias con Los Tulipanes",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.484701292169156, -70.77027758292971
         ),
+
+        /** 120*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Huenteno",
+            "Huenteno 1265",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.49186438627932, -70.76918153100335
         ),
+
+        /** 121*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Collanco",
+            "Collanco 1270",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.49172675345813, -70.76911900489584
         ),
+
+        /** 122*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Ibañez Poniente",
+            "Rio Ibañez Poniente 5787",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.48149419164909, -70.76371999758287
         ),
+
+        /** 123*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
+            "Multicancha Thiare",
             "Hermanos Carrera con Rengifo",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.482130581688004, -70.76193347838799
         ),
+
+        /** 124*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Los Begonias",
+            "Avenida El Rosal 5770",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.482655728704124, -70.76331847576333
         ),
+
+        /** 125*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Parquesito",
+            "Avenida Isabel Riquelme Nte. 3590",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.491747601239226, -70.75601289182939
         ),
+
+        /** 126*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha La Reforma",
+            "La Reforma 830",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.48672370453688, -70.76320789801407
         ),
+
+        /** 127*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Leiden",
+            "Los tulipanes 150",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.48713427797476, -70.7746842291977
         ),
+
+        /** 128*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha La Victoria",
+            "Victoria de Abril 1333",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.48903977211703, -70.76773795744835
         ),
+
+        /** 129*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Los Columpios",
+            "Los Columpios 1386",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.51306623065117, -70.74195825974586
         ),
+
+        /** 130*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Jose Manuel Irarrazaval",
+            "José Manuel Irarrázaval 391",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.51353633077774, -70.75276170751452
         ),
+
+        /** 131*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Villa 4 Alamos",
+            "La Mansion 905",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.51780627359992, -70.74838177119913
         ),
+
+        /** 132*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Pelarco",
+            "Pelarco 1440",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.545955178467366, -70.76220676109874
         ),
+
+        /** 133*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Villa San Juan",
+            "Abisinia 451",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.542120555164445, -70.77070875753117
         ),
+
+        /** 134*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Egipto",
+            "Egipto 1430",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.548729530622225, -70.76372368631846
         ),
+
+        /** 135*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Esdras",
+            "Esdras 1339",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.552390845993784, -70.76746327949849
         ),
+
+        /** 136*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Las Industrias",
+            "Tutankamon 480",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.54502886378553, -70.77335398095292
         ),
+
+        /** 137*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Trimegisto",
+            "Trimegisto 892",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.54706754057084, -70.77008073835782
         ),
+
+        /** 138*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Curaco",
+            "Curaco 1418",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.54773103130863, -70.7629281004825
         ),
+
+        /** 139*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Sierra Gorda",
+            "Sierra Gorda 1475",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.554507103896974, -70.76672870353717
         ),
+
+        /** 140*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Lago Albano",
+            "Parque Central Poniente 1559",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.56386552265493, -70.7826879347624
         ),
+
+        /** 141*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Cerro Nevado",
+            "Cerro Nevado 1771",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.498674461466805, -70.73523552152213
         ),
+
+        /** 142*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha 3 Norte / Lumen",
+            "Lumen 3640",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.49540116763148, -70.7361282035114
         ),
+
+        /** 143*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Primo de Rivera",
+            "Segunda Transversal con Primo de Rivera",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.49239103698208, -70.7429076883425
         ),
+
+        /** 144*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha 3 Norte / Lumen / 2",
+            "Lumen 3640",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.49546879022372, -70.73591427415151
         ),
+
+        /** 145*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Hungria",
+            "Hungria 2253",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.489745606514624, -70.73395007915062
         ),
+
+        /** 146*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Sebastián Elcano",
+            "Sebastian Elcano 1592",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.50269470267869, -70.73712835754372
         ),
+
+        /** 147*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Canada",
+            "Canada 3434",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.49738716134016, -70.7384719377748
         ),
+
+        /** 148*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Guacolda",
+            "Guacolda 2340",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.50457394059058, -70.77028066702212
         ),
+
+        /** 149*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Minerva",
+            "Minerva 3063",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.49909731161425, -70.77788500404051
         ),
+
+        /** 150*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha El Vivero",
+            "El Peuco 583",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.4941307293094, -70.76458866070806
         ),
+
+        /** 151*/
+        /** NO EXISTE */
+
+        /** 152*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha El Porvenir",
+            "Pasaje Los Patriotas 2930",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.50113538129353, -70.76751263706248
         ),
+
+        /** 153*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha La Armada",
+            "La Armada 2571",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.5044336051234, -70.77524251662643
         ),
+
+        /** 154*/
+        /** NO EXISTE */
+
+        /** 155*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Pudeto",
+            "Pudeto 3430 - Al final del Pasaje",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.49564663934921, -70.77290875022415
         ),
+
+        /** 156*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Galicia",
+            "Galicia 2948",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.5007038571927, -70.7769436998523
         ),
+
+        /** 157*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Los Baguales",
+            "Los Baguales 1029",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.49975684522426, -70.77024378217212
         ),
+
+        /** 158*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha de la Victoria",
+            "Victoria 2470",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.50280415437689, -70.7693329847341
         ),
+
+        /** 159*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Guayaquil",
+            "Guayaquil 2215",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.503211894177994, -70.77135155638827
         ),
+
+        /** 160*/
         FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
+            "Multicancha Tenerife",
+            "Tenerife 3231",
             "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
-        ),
-        FIELD_DBO(
-            "Multicancha Hermanos Carrera",
-            "Hermanos Carrera con Rengifo",
-            "Maipú",
-            -33.51867788290727,
-            -70.76054753427009
+            -33.497547743163466, -70.76836883961005
         ),
     )
 }

@@ -13,6 +13,7 @@ import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.databinding.FragmentProfileBinding
 import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses
 import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.firebaseAuth
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.android.ext.android.inject
 
@@ -23,6 +24,7 @@ class ProfileFragment: BaseFragment() {
     override val _viewModel: ProfileViewModel by inject()
     private lateinit var binding: FragmentProfileBinding
     private val cloudDB = FirebaseFirestore.getInstance()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {

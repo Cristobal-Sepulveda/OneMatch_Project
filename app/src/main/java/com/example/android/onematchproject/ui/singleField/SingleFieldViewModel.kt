@@ -16,7 +16,6 @@ class SingleFieldViewModel(val app: Application,
                            val dataSource: AppDataSource, ) : BaseViewModel(app) {
 
     val cloudDB = FirebaseFirestore.getInstance()
-
     data class user(
         val name: String,
         val mail: String

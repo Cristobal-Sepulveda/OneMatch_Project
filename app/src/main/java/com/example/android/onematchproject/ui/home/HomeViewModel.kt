@@ -1,14 +1,13 @@
 package com.example.android.onematchproject.ui.home
 
-import androidx.lifecycle.ViewModel
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.firebaseAuth
+import android.app.Application
+import com.example.android.onematchproject.base.BaseViewModel
+import com.example.android.onematchproject.data.AppDataSource
 
-class HomeViewModel : ViewModel() {
 
-    val userName = if(firebaseAuth.currentUser != null){
-        "Welcome ${firebaseAuth.currentUser!!.displayName}"
-    } else{
-        "Welcome"
-    }
+class HomeViewModel (val app: Application, val dataSource: AppDataSource) : BaseViewModel(app)
+{
+
+
 
 }
