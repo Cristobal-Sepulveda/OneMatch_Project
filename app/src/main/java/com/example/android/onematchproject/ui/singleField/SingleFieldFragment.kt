@@ -21,6 +21,9 @@ class SingleFieldFragment: BaseFragment() {
     override val _viewModel: SingleFieldViewModel by inject()
     private lateinit var binding: FragmentSingleFieldBinding
 
+
+    //fcgp
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
