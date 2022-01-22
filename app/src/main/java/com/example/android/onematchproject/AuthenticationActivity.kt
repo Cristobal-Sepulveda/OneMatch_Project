@@ -8,9 +8,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.android.onematchproject.databinding.ActivityAuthenticationBinding
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.REQUEST_TURN_DEVICE_LOCATION_ON
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.SIGN_IN_RESULT_CODE
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.TAG
+import com.example.android.onematchproject.utils.Constants.REQUEST_TURN_DEVICE_LOCATION_ON
+import com.example.android.onematchproject.utils.Constants.SIGN_IN_RESULT_CODE
+import com.example.android.onematchproject.utils.Constants.TAG
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.gms.common.api.ResolvableApiException

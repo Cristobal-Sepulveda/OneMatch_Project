@@ -11,9 +11,8 @@ import androidx.databinding.DataBindingUtil
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.databinding.FragmentProfileBinding
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.firebaseAuth
-import com.google.firebase.auth.FirebaseAuth
+import com.example.android.onematchproject.utils.Constants
+import com.example.android.onematchproject.utils.Constants.firebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import org.koin.android.ext.android.inject
 
@@ -55,7 +54,7 @@ class ProfileFragment: BaseFragment() {
             println(firebaseAuth.currentUser.email)
             cloudDB.collection("user")
                 .document(firebaseAuth.currentUser.email)
-                .set(hashMapOf("provider" to CommonVariablesToUseinDifferentClasses.ProviderType.BASIC.name,
+                .set(hashMapOf("provider" to Constants.ProviderType.BASIC.name,
                     "name" to firebaseAuth.currentUser.displayName,
                     "photo" to firebaseAuth.currentUser.photoUrl,
                     "position" to menuItem.title,

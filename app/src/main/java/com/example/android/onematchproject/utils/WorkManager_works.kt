@@ -24,7 +24,7 @@ import androidx.work.WorkerParameters
 import com.example.android.onematchproject.data.AppDataSource
 import com.example.android.onematchproject.data.data_objects.DTO.FIELD_DTO
 import com.example.android.onematchproject.data.data_objects.DTO.asDataBaseModel
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.firebaseAuth
+import com.example.android.onematchproject.utils.Constants.firebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint

@@ -1,5 +1,6 @@
  package com.example.android.onematchproject.ui.singleField
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,16 +11,33 @@ import androidx.databinding.DataBindingUtil
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.databinding.FragmentSingleFieldBinding
+import com.example.android.onematchproject.utils.PaymentsUtil
+import com.example.android.onematchproject.utils.microsToString
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.wallet.*
+import org.json.JSONArray
+import org.json.JSONObject
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.roundToLong
 
-class SingleFieldFragment: BaseFragment() {
+ class SingleFieldFragment: BaseFragment() {
 
     //use Koin to retrieve the ViewModel instance
     override val _viewModel: SingleFieldViewModel by inject()
     private lateinit var binding: FragmentSingleFieldBinding
+    private lateinit var paymentsClient: PaymentsClient
+    private val shippingCost = (90 * 1000000).toLong()
+    private lateinit var selectedGarment: JSONObject
+
+     /**
+      * Arbitrarily-picked constant integer you define to track a request for payment data activity.
+      *
+      * @value #LOAD_PAYMENT_DATA_REQUEST_CODE
+      */
+     private val LOAD_PAYMENT_DATA_REQUEST_CODE = 991
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +56,16 @@ class SingleFieldFragment: BaseFragment() {
         }
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, days)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
+        // Initialize a Google Pay API client for an environment suitable for testing.
+        // It's recommended to create the PaymentsClient object inside of the onCreate method.
+        paymentsClient = PaymentsUtil.createPaymentsClient(requireActivity())
+        possiblyShowGooglePayButton()
+
+        binding.googlePayButton.root.setOnClickListener{
+            requestPayment()
+        }
+
 
         return binding.root
     }
@@ -125,6 +153,64 @@ class SingleFieldFragment: BaseFragment() {
             binding.player7.text = "8) ${_viewModel.listOfPlayers.value!![7].name}"
             binding.player8.text = "9) ${_viewModel.listOfPlayers.value!![8].name}"
             binding.player9.text = "10) ${_viewModel.listOfPlayers.value!![9].name}"
+        }
+    }
+
+    /**
+     * Determine the viewer's ability to pay with a payment method supported by your app and display a
+     * Google Pay payment button.
+     *
+     * @see [](https://developers.google.com/android/reference/com/google/android/gms/wallet/PaymentsClient.html.isReadyToPay
+    ) */
+    private fun possiblyShowGooglePayButton() {
+
+        val isReadyToPayJson = PaymentsUtil.isReadyToPayRequest() ?: return
+        val request = IsReadyToPayRequest.fromJson(isReadyToPayJson.toString()) ?: return
+
+        // The call to isReadyToPay is asynchronous and returns a Task. We need to provide an
+        // OnCompleteListener to be triggered when the result of the call is known.
+        val task = paymentsClient.isReadyToPay(request)
+        task.addOnCompleteListener { completedTask ->
+            try {
+                completedTask.getResult(ApiException::class.java)?.let(::setGooglePayAvailable)
+            } catch (exception: ApiException) {
+                // Process error
+                Log.w("isReadyToPay failed", exception)
+            }
+        }
+    }
+
+    private fun setGooglePayAvailable(available: Boolean) {
+        if (available) {
+            binding.googlePayButton.root.visibility = View.VISIBLE
+            binding.googlePayButton.root.setOnClickListener { requestPayment() }
+        } else {
+            // Unable to pay using Google Pay. Update your UI accordingly
+        }
+    }
+
+    private fun requestPayment() {
+        // Disables the button to prevent multiple clicks.
+        binding.googlePayButton.root.isClickable = false
+
+        // The price provided to the API should include taxes and shipping.
+        // This price is not displayed to the user.
+        val garmentPriceMicros = (selectedGarment.getDouble("price") * 1000000).roundToLong()
+        val price = (garmentPriceMicros + shippingCost).microsToString()
+
+        val paymentDataRequestJson = PaymentsUtil.getPaymentDataRequest(price)
+        if (paymentDataRequestJson == null) {
+            Log.e("RequestPayment", "Can't fetch payment data request")
+            return
+        }
+        val request = PaymentDataRequest.fromJson(paymentDataRequestJson.toString())
+
+        // Since loadPaymentData may show the UI asking the user to select a payment method, we use
+        // AutoResolveHelper to wait for the user interacting with it. Once completed,
+        // onActivityResult will be called with the result.
+        if (request != null) {
+            AutoResolveHelper.resolveTask(
+                paymentsClient.loadPaymentData(request), requireActivity(), LOAD_PAYMENT_DATA_REQUEST_CODE)
         }
     }
 }

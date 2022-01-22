@@ -1,5 +1,6 @@
 package com.example.android.onematchproject
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -11,17 +12,25 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.wallet.IsReadyToPayRequest
+import com.google.android.gms.wallet.PaymentsClient
+import com.google.android.gms.wallet.Wallet
+import com.google.android.gms.wallet.WalletConstants
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
+import org.json.JSONArray
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     val cloudDB = FirebaseFirestore.getInstance()
 
-
+    //Google Pay
+    private lateinit var paymentsClient: PaymentsClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,6 +46,9 @@ class MainActivity : AppCompatActivity() {
         // Setting the navigation for the BottomNavigationView
         val navView = findViewById<BottomNavigationView>(R.id.nav_bottom)
         navView.setupWithNavController(navController)
+
+        //Google Pay
+        paymentsClient = createPaymentsClient(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -59,5 +71,14 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun createPaymentsClient(activity: Activity): PaymentsClient {
+
+        val walletOptions = Wallet.WalletOptions.Builder()
+            .setEnvironment(WalletConstants.ENVIRONMENT_TEST)
+            .build()
+
+        return Wallet.getPaymentsClient(activity, walletOptions)
     }
 }

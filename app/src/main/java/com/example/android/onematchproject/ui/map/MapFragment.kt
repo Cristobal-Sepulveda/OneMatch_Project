@@ -21,13 +21,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
-import com.example.android.onematchproject.data.data_objects.DBO.FIELD_DBO
 import com.example.android.onematchproject.databinding.FragmentMapBinding
-import com.example.android.onematchproject.utils.CommonVariablesToUseinDifferentClasses.canchas_maipu
+import com.example.android.onematchproject.utils.Constants.canchas_maipu
 import com.example.android.onematchproject.utils.NavigationCommand
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -38,7 +35,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
-import java.util.ArrayList
 
 
 class MapFragment() : BaseFragment(), OnMapReadyCallback {
@@ -64,10 +60,7 @@ class MapFragment() : BaseFragment(), OnMapReadyCallback {
     private var lastKnownLocation: Location? = null
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>
 
-
-
-
-    @ExperimentalStdlibApi
+    
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {

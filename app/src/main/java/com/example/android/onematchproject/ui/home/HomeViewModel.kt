@@ -8,6 +8,4 @@ import com.example.android.onematchproject.data.AppDataSource
 class HomeViewModel (val app: Application, val dataSource: AppDataSource) : BaseViewModel(app)
 {
 
-
-
 }

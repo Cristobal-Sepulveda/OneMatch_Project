@@ -14,6 +14,8 @@ import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.databinding.FragmentHomeBinding
 import com.example.android.onematchproject.ui.map.MapViewModel
+import com.google.android.gms.wallet.Wallet
+import com.google.android.gms.wallet.WalletConstants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,6 +28,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
+
 class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
@@ -33,9 +36,22 @@ class HomeFragment : BaseFragment() {
     val cloudDB = FirebaseFirestore.getInstance()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View {
+
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_home,
+            container,
+            false)
+
         val firebaseAuth = FirebaseAuth.getInstance()
+
+
+
+
 
         return binding.root
     }
