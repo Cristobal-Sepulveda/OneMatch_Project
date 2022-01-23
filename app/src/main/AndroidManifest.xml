@@ -31,9 +31,8 @@
             android:value="@string/google_maps_key" />
 
         <meta-data
-            android:name='com.google.android.gms.wallet.api.enable'
-            android:value="true"
-            />
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
 
         <activity
             android:name=".AuthenticationActivity">

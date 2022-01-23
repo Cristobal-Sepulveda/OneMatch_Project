@@ -54,4 +54,7 @@
         <item></item>
         <item></item>
     </string-array>
+    <string name="googlepay_button_content_description">Google Pay</string>
+    <string name="pay_with_googlepay_button_content_description">Pagar con Google Pay</string>
+
 </resources>

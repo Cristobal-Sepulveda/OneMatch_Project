@@ -1,5 +1,6 @@
  package com.example.android.onematchproject.ui.singleField
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,13 @@ import androidx.databinding.DataBindingUtil
 import com.example.android.onematchproject.R
 import com.example.android.onematchproject.base.BaseFragment
 import com.example.android.onematchproject.databinding.FragmentSingleFieldBinding
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.wallet.IsReadyToPayRequest
+import com.google.android.gms.wallet.PaymentsClient
+import com.google.android.gms.wallet.Wallet
+import com.google.android.gms.wallet.WalletConstants
+import org.json.JSONArray
+import org.json.JSONObject
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,19 +28,38 @@ class SingleFieldFragment: BaseFragment() {
     //use Koin to retrieve the ViewModel instance
     override val _viewModel: SingleFieldViewModel by inject()
     private lateinit var binding: FragmentSingleFieldBinding
+    private lateinit var paymentsClient: PaymentsClient
+    private val baseCardPaymentMethod = JSONObject().apply {
+        put("type", "CARD")
+        put("parameters", JSONObject().apply {
+            put("allowedCardNetworks", JSONArray(listOf("VISA", "MASTERCARD")))
+            put("allowedAuthMethods", JSONArray(listOf("PAN_ONLY", "CRYPTOGRAM_3DS")))
+        })
+    }
 
+    private val googlePayBaseConfiguration = JSONObject().apply {
+        put("apiVersion", 2)
+        put("apiVersionMinor", 0)
+        put("allowedPaymentMethods",  JSONArray().put(baseCardPaymentMethod))
+    }
 
-    //fcgp
+    val readyToPayRequest = IsReadyToPayRequest.fromJson(googlePayBaseConfiguration.toString())
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
 
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_single_field, container, false)
+        paymentsClient = createPaymentsClient(requireActivity())
+        val readyToPayTask = paymentsClient.isReadyToPay(readyToPayRequest)
+
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_single_field,
+            container,
+            false)
+
         binding.viewModel = _viewModel
         binding.lifecycleOwner = this
+
         val days = resources.getStringArray(R.array.days)
         var i = 0
         while (i < getFourteenDaysDatesFromToday().size) {
@@ -41,6 +68,18 @@ class SingleFieldFragment: BaseFragment() {
         }
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, days)
         binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
+        val task = paymentsClient.isReadyToPay(readyToPayRequest)
+
+        task.addOnCompleteListener { task ->
+            try {
+                task.getResult(ApiException::class.java)?.let(::setGooglePayAvailable)
+            }catch (exception: ApiException) {
+                Log.i("TAG", exception.toString())
+                // Error determining readiness to use Google Pay.
+                // Inspect the logs for more details.
+            }
+        }
 
         return binding.root
     }
@@ -129,5 +168,25 @@ class SingleFieldFragment: BaseFragment() {
             binding.player8.text = "9) ${_viewModel.listOfPlayers.value!![8].name}"
             binding.player9.text = "10) ${_viewModel.listOfPlayers.value!![9].name}"
         }
+    }
+
+    fun createPaymentsClient(activity: Activity): PaymentsClient {
+        val walletOptions = Wallet.WalletOptions.Builder()
+            .setEnvironment(WalletConstants.ENVIRONMENT_TEST).build()
+        return Wallet.getPaymentsClient(activity, walletOptions)
+    }
+
+    private fun setGooglePayAvailable(available: Boolean) {
+        if (available) {
+            binding.googlePayButton.root.visibility = View.VISIBLE
+            binding.googlePayButton.root.setOnClickListener { requestPayment() }
+        } else {
+            // Unable to pay using Google Pay. Update your UI accordingly.
+        }
+    }
+
+    private fun requestPayment() {
+        Log.i("TAG", "clickListener operativo :)!")
+        // TODO: Perform transaction
     }
 }

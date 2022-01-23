@@ -274,5 +274,20 @@
             app:layout_constraintStart_toEndOf="@+id/equipo1_button"
             app:layout_constraintTop_toBottomOf="@id/cardView" />
 
+        <include
+            android:id="@+id/googlePayButton"
+            layout="@layout/pay_with_googlepay_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/space_small"
+            android:layout_marginEnd="@dimen/space_small"
+            android:layout_marginBottom="@dimen/space_big"
+            android:layout_marginTop="@dimen/space_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/equipo1_button"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
